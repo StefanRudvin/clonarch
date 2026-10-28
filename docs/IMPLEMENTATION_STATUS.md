@@ -16,9 +16,9 @@ Updated 2026-10-27. Running in-process on the current VM at `http://192.168.105.
 
 ## Not implemented/enabled yet
 
-- Plaid credentials, Link, actual Chase/Amex/checking accounts, sync scheduler, pending reconciliation, durable sync jobs, Trial quota guard, bank-history coverage and real 365-day fill.
+- Plaid Link/exchange and manual per-connection `/transactions/sync` endpoints are implemented but **not configured or used** yet. Credentials must be entered locally; actual Chase/Amex/checking links, periodic scheduler, pending UI reconciliation, durable sync jobs, Trial quota accounting, bank-history coverage and real 365-day fill remain incomplete.
 - JEX/Codex classification adapter, Codex login, classification subprocess or external transaction-data transmission.
-- Owner-specific Chase/Amex CSV mapping; generic import is not a full duplicate-safe production importer.
+- Owner-specific Chase/Amex CSV mapping; generic import is not a full duplicate-safe production importer. Plaid API calls should first be tested with one login and reconciled against a statement.
 - Actual date fallback semantics are incomplete: UI labels posted fallback but backend currently accepts one effective date. Income classification in manual UI selects `purchase_date` plus `posted_date`; report uses posted date.
 - Historical transactions are currently returned/filtered by purchase date. Monthly report logic covers expenses/refunds and actual vs normalized basics, but needs further integration/edge-case tests. No coverage-completeness model.
 - Expected pay schedule, trend/averages, account management/editor, named exceptional events, refunds matching and audit/change history.
@@ -29,11 +29,11 @@ Updated 2026-10-27. Running in-process on the current VM at `http://192.168.105.
 
 - `uv sync` installed backend/test dependencies into `backend/.venv`; Node deps in `frontend/node_modules`; Python 3.12.16 at `.tools/python`; uv and Codex CLI at `.tools` (see INSTALLATION_PROPOSAL.md).
 - `npm run build --prefix frontend`: passes.
-- `cd backend && ../.tools/bin/uv run --python ../.tools/python/cpython-3.12.16-linux-x86_64-gnu/bin/python3.12 pytest -q`: 3 tests pass (cent allocation; manual/income/smoothed report+CSRF; CSV preview/commit/replay).
+- `cd backend && ../.tools/bin/uv run --python ../.tools/python/cpython-3.12.16-linux-x86_64-gnu/bin/python3.12 pytest -q`: 5 tests pass, including mocked Plaid sync and the disabled-without-credentials guard. Frontend Vitest: 10 tests pass; production build succeeds.
 - Production app GET `/`, `/api/v1/health/ready`, `/api/v1/accounts`, `/api/v1/reports/monthly` verified from the VM.
 - Listener verified as `192.168.105.10:8787`, not wildcard. Host router/firewall/WAN/VLAN exposure cannot be verified from this inspection.
 - Runtime DB directory mode 0700, database/WAL/SHM/log mode 0600; server process runs under the current user.
-- No real financial records/provider credentials were used. Live app starts with no imported transactions.
+- No real financial records/provider credentials were used. Live app database contains only five generic account placeholders and zero transactions. Plaid local setup script has not been run.
 
 ## Operations
 

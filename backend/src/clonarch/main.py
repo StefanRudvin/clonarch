@@ -7,6 +7,9 @@ import json
 import os
 import re
 import secrets
+import threading
+import urllib.error
+import urllib.request
 import uuid
 from contextlib import asynccontextmanager
 from datetime import date, datetime, timezone
@@ -16,6 +19,7 @@ from typing import Any, Literal
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import re2
+from cryptography.fernet import Fernet, InvalidToken
 from fastapi import Depends, FastAPI, File, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, Field, field_validator, model_validator
@@ -47,6 +51,7 @@ os.chmod(DATA_DIR, 0o700)
 engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False, "timeout": 20})
 SessionLocal = sessionmaker(engine, expire_on_commit=False)
 csrf_sessions: dict[str, str] = {}
+plaid_sync_lock = threading.Lock()
 
 
 class Base(DeclarativeBase):
@@ -118,6 +123,38 @@ class ImportBatch(Base):
     errors_json: Mapped[str] = mapped_column(Text)
     state: Mapped[str] = mapped_column(String(20), default="previewed")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class PlaidConnection(Base):
+    __tablename__ = "plaid_connections"
+    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    item_id: Mapped[str] = mapped_column(String(128), unique=True)
+    institution_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    institution_name: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    access_token_encrypted: Mapped[str] = mapped_column(Text)
+    cursor: Mapped[str | None] = mapped_column(Text, nullable=True)
+    update_status: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    state: Mapped[str] = mapped_column(String(30), default="active")
+    last_success_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    last_error_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class PlaidAccountLink(Base):
+    __tablename__ = "plaid_account_links"
+    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    connection_id: Mapped[str] = mapped_column(ForeignKey("plaid_connections.id"))
+    external_account_id: Mapped[str] = mapped_column(String(128), unique=True)
+    account_id: Mapped[str] = mapped_column(ForeignKey("accounts.id"))
+    mask: Mapped[str | None] = mapped_column(String(8), nullable=True)
+    subtype: Mapped[str | None] = mapped_column(String(50), nullable=True)
+
+
+class PlaidTransactionSource(Base):
+    __tablename__ = "plaid_transaction_sources"
+    external_transaction_id: Mapped[str] = mapped_column(String(128), primary_key=True)
+    account_id: Mapped[str] = mapped_column(ForeignKey("accounts.id"))
+    transaction_id: Mapped[str] = mapped_column(ForeignKey("transactions.id"))
 
 
 class TransactionIn(BaseModel):
@@ -199,7 +236,49 @@ def month_name(index: int) -> str:
     return f"{index // 12:04d}-{index % 12 + 1:02d}"
 
 
+def plaid_configuration() -> tuple[dict[str, str], Fernet] | None:
+    config_path = ROOT / ".secrets" / "plaid.json"
+    key_path = ROOT / ".secrets" / "plaid-fernet.key"
+    if not config_path.is_file() or not key_path.is_file():
+        return None
+    if config_path.stat().st_mode & 0o077 or key_path.stat().st_mode & 0o077:
+        raise RuntimeError("Plaid credential files must be private (mode 0600)")
+    config = json.loads(config_path.read_text())
+    if config.get("environment") != "production" or not config.get("client_id") or not config.get("secret"):
+        raise RuntimeError("Plaid configuration must contain Trial Production credentials")
+    return config, Fernet(key_path.read_bytes().strip())
+
+
+def plaid_api(endpoint: str, payload: dict[str, Any]) -> dict[str, Any]:
+    configured = plaid_configuration()
+    if not configured:
+        raise HTTPException(409, "Plaid credentials are not configured on this VM")
+    config, _ = configured
+    # Plaid Trial uses Production. API host is fixed; the frontend cannot select an endpoint.
+    body = {"client_id": config["client_id"], "secret": config["secret"], **payload}
+    request = urllib.request.Request(
+        f"https://production.plaid.com/{endpoint.lstrip('/')}",
+        data=json.dumps(body, separators=(",", ":")).encode(),
+        headers={"Content-Type": "application/json", "Plaid-Version": "2020-09-14"}, method="POST")
+    try:
+        with urllib.request.urlopen(request, timeout=40) as response:
+            raw = response.read(8 * 1024 * 1024 + 1)
+        if len(raw) > 8 * 1024 * 1024:
+            raise HTTPException(502, "Plaid response exceeded the configured size limit")
+        return json.loads(raw, parse_float=Decimal)
+    except urllib.error.HTTPError as exc:
+        try:
+            error = json.loads(exc.read(65536))
+            code = str(error.get("error_code", "PLAID_ERROR"))[:80]
+        except Exception:
+            code = "PLAID_ERROR"
+        raise HTTPException(502, f"Plaid request failed ({code}); check connection status") from None
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+        raise HTTPException(503, "Plaid could not be reached; retry later") from None
+
+
 def allocate(amount_minor: int, months: int) -> list[int]:
+
     quotient, remainder = divmod(abs(amount_minor), months)
     sign = -1 if amount_minor < 0 else 1
     return [sign * (quotient + (i < remainder)) for i in range(months)]
@@ -305,7 +384,7 @@ async def browser_safety(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self' https://cdn.plaid.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.plaid.com; frame-src https://*.plaid.com; img-src 'self' data: https://*.plaid.com; frame-ancestors 'none'; base-uri 'self'"
     return response
 
 
@@ -315,10 +394,231 @@ def context(request: Request):
     csrf = csrf_sessions.setdefault(session_id, secrets.token_urlsafe(32))
     response = JSONResponse(envelope({"name": "Clonarch", "currency": "USD", "timezone": TIMEZONE,
                                       "date_basis": "purchase date; posted fallback shown",
-                                      "features": {"plaid": False, "jex": False, "imports": True}}, request))
+                                      "features": {"plaid": plaid_configuration() is not None, "jex": False, "imports": True}}, request))
     response.set_cookie("clonarch_session", session_id, httponly=True, samesite="strict", secure=False, max_age=28800, path="/")
     response.headers["X-CSRF-Token"] = csrf
     return response
+
+
+@app.get("/api/v1/plaid/status")
+def plaid_status(request: Request, db: Session = Depends(db_session)):
+    configured = plaid_configuration() is not None
+    rows = db.scalars(select(PlaidConnection).order_by(PlaidConnection.created_at)).all()
+    return envelope({"configured": configured, "environment": "production" if configured else None,
+                     "history_days_requested": 365, "connections": [{
+                         "id": c.id, "institution_name": c.institution_name or "Financial institution",
+                         "state": c.state, "update_status": c.update_status,
+                         "last_success_at": c.last_success_at.isoformat() if c.last_success_at else None,
+                         "accounts": [{"name": (db.get(Account, link.account_id).name if db.get(Account, link.account_id) else "Account"),
+                                       "mask": link.mask, "subtype": link.subtype}
+                                      for link in db.scalars(select(PlaidAccountLink).where(PlaidAccountLink.connection_id == c.id)).all()]
+                     } for c in rows]}, request)
+
+
+@app.post("/api/v1/plaid/link-token")
+def plaid_link_token(request: Request):
+    response = plaid_api("link/token/create", {
+        "client_name": "Clonarch", "user": {"client_user_id": "clonarch-household-v1"},
+        "products": ["transactions"], "country_codes": ["US"], "language": "en",
+        "transactions": {"days_requested": 365}
+    })
+    return envelope({"link_token": response["link_token"], "expiration": response.get("expiration"),
+                     "history_days_requested": 365}, request)
+
+
+@app.post("/api/v1/plaid/exchange")
+def plaid_exchange(payload: dict, request: Request, db: Session = Depends(db_session)):
+    public_token = payload.get("public_token")
+    metadata = payload.get("metadata") or {}
+    if not isinstance(public_token, str) or not public_token or len(public_token) > 4096:
+        raise HTTPException(422, "Invalid Plaid Link token")
+    configured = plaid_configuration()
+    if not configured:
+        raise HTTPException(409, "Plaid credentials are not configured")
+    _, fernet = configured
+    exchanged = plaid_api("item/public_token/exchange", {"public_token": public_token})
+    item_id = exchanged.get("item_id")
+    access_token = exchanged.get("access_token")
+    if not isinstance(item_id, str) or not isinstance(access_token, str):
+        raise HTTPException(502, "Plaid returned an invalid connection response")
+    connection = db.scalar(select(PlaidConnection).where(PlaidConnection.item_id == item_id))
+    if connection:
+        raise HTTPException(409, "This Plaid connection is already saved; use the existing connection")
+    connection = PlaidConnection(item_id=item_id, institution_id=str(metadata.get("institution", {}).get("institution_id") or "")[:100] or None,
+                                 institution_name=str(metadata.get("institution", {}).get("name") or "")[:160] or None,
+                                 access_token_encrypted=fernet.encrypt(access_token.encode()).decode(), state="active")
+    db.add(connection)
+    db.commit()
+    accounts_response = plaid_api("accounts/get", {"access_token": access_token})
+    saved_accounts = []
+    institution = connection.institution_name or "Plaid"
+    for provider_account in accounts_response.get("accounts", []):
+        external_id = provider_account.get("account_id")
+        if not isinstance(external_id, str):
+            continue
+        existing = db.scalar(select(PlaidAccountLink).where(PlaidAccountLink.external_account_id == external_id))
+        if existing:
+            saved_accounts.append(existing.account_id)
+            continue
+        account_type = provider_account.get("type")
+        subtype = str(provider_account.get("subtype") or "")[:50]
+        is_card = account_type == "credit"
+        kind = "credit_card" if is_card else ("checking" if account_type == "depository" and subtype == "checking" else "other")
+        mask = str(provider_account.get("mask") or "")[-4:] or None
+        display = str(provider_account.get("name") or provider_account.get("official_name") or "Account")[:70]
+        label = f"{institution} · {display}" + (f" ····{mask}" if mask else "")
+        account = Account(name=label[:100], owner="Household" if is_card else "Owner", kind=kind)
+        db.add(account)
+        db.flush()
+        link = PlaidAccountLink(connection_id=connection.id, external_account_id=external_id,
+                                account_id=account.id, mask=mask, subtype=subtype or None)
+        db.add(link)
+        saved_accounts.append(account.id)
+    db.commit()
+    return envelope({"connection_id": connection.id, "institution_name": institution,
+                     "accounts": [{"id": account_id, "name": db.get(Account, account_id).name,
+                                   "kind": db.get(Account, account_id).kind} for account_id in saved_accounts]}, request)
+
+
+def sync_plaid_connection(connection: PlaidConnection, db: Session) -> dict[str, Any]:
+    configured = plaid_configuration()
+    if not configured:
+        raise HTTPException(409, "Plaid credentials are not configured")
+    _, fernet = configured
+    try:
+        access_token = fernet.decrypt(connection.access_token_encrypted.encode()).decode()
+    except (InvalidToken, ValueError):
+        raise HTTPException(500, "Could not decrypt Plaid connection token; check the local key file") from None
+    starting_cursor = connection.cursor
+    cursor = starting_cursor
+    added: list[dict[str, Any]] = []
+    modified: list[dict[str, Any]] = []
+    removed: list[dict[str, Any]] = []
+    update_status = None
+    for _ in range(1000):
+        body: dict[str, Any] = {"access_token": access_token, "count": 500}
+        if cursor:
+            body["cursor"] = cursor
+        page = plaid_api("transactions/sync", body)
+        added.extend(page.get("added", []))
+        modified.extend(page.get("modified", []))
+        removed.extend(page.get("removed", []))
+        cursor = page.get("next_cursor", cursor)
+        update_status = page.get("transactions_update_status", update_status)
+        if not page.get("has_more"):
+            break
+    else:
+        raise HTTPException(502, "Plaid history exceeded the safe pagination limit; no updates were applied")
+
+    links = {link.external_account_id: link for link in db.scalars(
+        select(PlaidAccountLink).where(PlaidAccountLink.connection_id == connection.id)).all()}
+    replaced_pending: set[str] = set()
+    added_count = modified_count = removed_count = skipped = 0
+    for row, is_added in [(r, True) for r in added] + [(r, False) for r in modified]:
+        external_account_id = row.get("account_id")
+        account_link = links.get(external_account_id)
+        external_id = row.get("transaction_id")
+        if not account_link or not isinstance(external_id, str):
+            skipped += 1
+            continue
+        source = db.get(PlaidTransactionSource, external_id)
+        pending_id = row.get("pending_transaction_id")
+        if source is None and isinstance(pending_id, str) and pending_id:
+            source = db.get(PlaidTransactionSource, pending_id)
+            if source:
+                replaced_pending.add(pending_id)
+        if source:
+            tx = db.get(Transaction, source.transaction_id)
+        else:
+            tx = Transaction(account_id=account_link.account_id, amount_minor=0, purchase_date=date.today(),
+                             description="", source="plaid", status="pending")
+            db.add(tx)
+            db.flush()
+        try:
+            pla_amount = Decimal(str(row.get("amount")))
+            cents = pla_amount * 100
+            if cents != cents.to_integral_value():
+                raise ValueError("non-cent amount")
+            amount_minor = -int(cents)
+            raw_date = row.get("date")
+            purchase = date.fromisoformat(str(row.get("authorized_date") or raw_date))
+            posted = date.fromisoformat(str(raw_date)) if not row.get("pending") and raw_date else None
+        except (ValueError, InvalidOperation, TypeError):
+            skipped += 1
+            continue
+        description = str(row.get("name") or row.get("original_description") or "Plaid transaction")[:500]
+        merchant = str(row.get("merchant_name") or "")[:200] or None
+        is_card = (db.get(Account, account_link.account_id).kind == "credit_card")
+        classification_text = f"{description} {merchant or ''}".casefold()
+        payment_hint = bool(re.search(r"\b(payment|autopay|payment thank you|credit card|cardmember|online payment|transfer)\b", classification_text))
+        payroll_hint = bool(re.search(r"\b(payroll|paycheck|salary|direct deposit|employer)\b", classification_text))
+        if payment_hint:
+            kind = "transfer"
+        elif is_card:
+            kind = "expense" if amount_minor < 0 else "refund"
+        else:
+            kind = "income" if amount_minor > 0 and payroll_hint else ("transfer" if amount_minor > 0 else "expense")
+        tx.account_id = account_link.account_id
+        tx.amount_minor = amount_minor
+        tx.purchase_date = purchase
+        tx.posted_date = posted
+        tx.description = description
+        tx.merchant = merchant
+        tx.kind = kind
+        tx.status = "pending" if row.get("pending") else "posted"
+        tx.source = "plaid"
+        if not tx.rule_locked:
+            apply_rules(tx, db)
+        if db.get(PlaidTransactionSource, external_id) is None:
+            db.add(PlaidTransactionSource(external_transaction_id=external_id,
+                                          account_id=account_link.account_id, transaction_id=tx.id))
+        if is_added:
+            added_count += 1
+        else:
+            modified_count += 1
+    for row in removed:
+        external_id = row.get("transaction_id")
+        if not isinstance(external_id, str) or external_id in replaced_pending:
+            continue
+        source = db.get(PlaidTransactionSource, external_id)
+        if source:
+            tx = db.get(Transaction, source.transaction_id)
+            if tx and tx.status != "removed":
+                tx.status = "removed"
+                removed_count += 1
+    connection.cursor = cursor
+    connection.update_status = update_status
+    connection.last_success_at = utcnow()
+    connection.last_error_code = None
+    connection.state = "active"
+    db.commit()
+    return {"added": added_count, "modified": modified_count, "removed": removed_count,
+            "skipped": skipped, "update_status": update_status, "has_cursor": bool(cursor)}
+
+
+@app.get("/api/v1/plaid/connections")
+def plaid_connections(request: Request, db: Session = Depends(db_session)):
+    return plaid_status(request, db)
+
+
+@app.post("/api/v1/plaid/{connection_id}/sync")
+def plaid_sync(connection_id: str, request: Request, db: Session = Depends(db_session)):
+    connection = db.get(PlaidConnection, connection_id)
+    if not connection:
+        raise HTTPException(404, "Plaid connection not found")
+    if not plaid_sync_lock.acquire(blocking=False):
+        raise HTTPException(409, "A Plaid sync is already running; retry shortly")
+    try:
+        try:
+            result = sync_plaid_connection(connection, db)
+        except HTTPException as exc:
+            connection.last_error_code = str(exc.detail)[:100]
+            connection.state = "error" if exc.status_code >= 500 else connection.state
+            db.commit()
+            raise
+        return envelope(result, request)
+    finally:
+        plaid_sync_lock.release()
 
 
 @app.get("/api/v1/health/ready")
