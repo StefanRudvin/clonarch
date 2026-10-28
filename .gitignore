@@ -1,0 +1,12 @@
+# Local runtime financial data and credentials
+/var/
+/.secrets/
+/.cache/
+/.tools/
+/backend/.venv/
+/frontend/node_modules/
+/frontend/dist/
+/frontend/*.tsbuildinfo
+__pycache__/
+*.py[cod]
+.pytest_cache/
