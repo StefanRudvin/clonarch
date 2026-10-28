@@ -25,6 +25,7 @@ Status: **Required/Confirmed** = owner instruction/answer; **Proposed** = recomm
 | D17 | Confirmed / unresolved details | Latest four distinct cards: two Chase + two Amex, replacing original inventory. Ownership/login grouping picked during Link; actual Trial/Safari/account availability still needs testing. |
 | D18 | Unresolved | Secure credential setup, CLI isolation/limits, exact CSV headers, annual allocation default periods, backups and unverified network routing. |
 | D19 | Verified docs / proposed | Standard desktop/mobile web OAuth supports popup flow without redirect_uri. Try standalone Safari first; supplied production redirect URI must be HTTPS. No public callback workaround. |
+| D20 | Confirmed | Add `interest` as a distinct transaction kind, separate from transfer and income totals. Add a shared hide toggle in both transaction-list views for transfer, income and interest; refunds/expenses remain visible. |
 
 ## Revision notes
 

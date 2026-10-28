@@ -8,7 +8,9 @@
 [data-theme='dark'] :is(.top, .month-control, .metric, .panel, .modal, .sync, .secondary, .theme-control select) { background: #232326; border-color: #414145; color: #e4e4e7; }
 [data-theme='dark'] :is(.brand, .month-control input, .income-line strong) { color: #e4e4e7; }
 [data-theme='dark'] :is(.brand small, .connection, .theme-control, .eyebrow, .eyebrow span, .subtitle, .tabs button, .basis-row small, .card-label, .card-foot, .panel-head p, .muted, .tx-date, .tx-main > span, .allocation-hint, .income-line, .entry-form label, .stack-form label, .modal label, .tiny, .empty, footer, .modal p, .modal-close, .rule-row small, .import-preview p) { color: #b4b4bc; }
-[data-theme='dark'] :is(.tabs, .tx-row, .income-line, .rule-row, footer) { border-color: #38383d; }
+[data-theme='dark'] :is(.tabs, .tx-row, .income-line, .rule-row, .suggestion-card, footer, hr) { border-color: #38383d; }
+[data-theme='dark'] :is(.suggestion-card > small, .suggestion-card label, .hide-toggle) { color: #b4b4bc; }
+[data-theme='dark'] .suggestion-card input { background: #1c1c1f; border-color: #525258; color: #e4e4e7; }
 [data-theme='dark'] :is(.sync:hover, .secondary:hover, .coverage-note, .import-preview) { background: #2d2d31; color: #c9c9d0; }
 [data-theme='dark'] :is(.segmented, .brand-icon) { background: #343438; }
 [data-theme='dark'] .segmented button { color: #bfbfc7; }
@@ -28,7 +30,7 @@
 [data-theme='dark'] .primary { background: #d4d4d8; color: #18181b; }
 [data-theme='dark'] .primary:hover { background: #f4f4f5; }
 [data-theme='dark'] .preview-rows { color: #c9c9d0; }
-[data-theme='dark'] .error-text { color: #ffb4a5 !important; }
+[data-theme='dark'] .error-text, [data-theme='dark'] .delete-rule { color: #ffb4a5 !important; }
 @media (max-width: 760px) {
   .theme-control { font-size: 10px; }
   .theme-control > span { display: none; }

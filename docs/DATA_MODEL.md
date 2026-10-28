@@ -62,7 +62,7 @@ Canonical identity independent of source:
 - Effective indexed projection: `amount_minor`, `effective_date?`, `date_provenance` (`user`, `authorized`, `posted_fallback`, `posted_income`, `manual_purchase`, `import_purchase`), `description`, `merchant?`, `status`, `kind`, `category_id?`, `spend_type`, `event_id?`, `recurring_hint`, `review_status`, `excluded`.
 - `refund_of_id?`, `note?`, `exclude_reason?`, `deleted_at?`, `version`, timestamps.
 
-`spend_type` always regular/exceptional on the record, but ignored in reports for income/transfers. `review_status`: `unreviewed` / `reviewed`; editing one field does not claim all fields were reviewed unless requested. API exposes which values are provisional and each field's provenance/lock.
+`spend_type` always regular/exceptional on the record, but ignored in reports for income/transfers/interest. Implemented 0.1 kinds are expense, refund, income, transfer, and interest; interest is a distinct non-spending/non-income kind (for example, bank interest) and can be hidden with income/transfers in transaction lists. `review_status`: `unreviewed` / `reviewed`; editing one field does not claim all fields were reviewed unless requested. API exposes which values are provisional and each field's provenance/lock.
 
 The projection is updated in the same transaction as source/override/classification changes. It is not an independent source of truth. All entry paths share one projection builder and invariant validator.
 

@@ -8,6 +8,7 @@ import os
 import re
 import secrets
 import threading
+import time
 import urllib.error
 import urllib.request
 import uuid
@@ -91,6 +92,7 @@ class Transaction(Base):
     source: Mapped[str] = mapped_column(String(20), default="manual")
     status: Mapped[str] = mapped_column(String(20), default="posted")
     rule_locked: Mapped[bool] = mapped_column(Boolean, default=False)
+    rule_reviewed: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
@@ -101,6 +103,7 @@ class Rule(Base):
     pattern: Mapped[str] = mapped_column(String(512))
     category_id: Mapped[str | None] = mapped_column(ForeignKey("categories.id"), nullable=True)
     spend_type: Mapped[str] = mapped_column(String(20), default="regular")
+    kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
     priority: Mapped[int] = mapped_column(Integer, default=100)
     enabled: Mapped[bool] = mapped_column(Boolean, default=True)
 
@@ -164,7 +167,7 @@ class TransactionIn(BaseModel):
     posted_date: date | None = None
     description: str = Field(min_length=1, max_length=500)
     merchant: str | None = Field(default=None, max_length=200)
-    kind: Literal["expense", "refund", "income", "transfer"] = "expense"
+    kind: Literal["expense", "refund", "income", "transfer", "interest"] = "expense"
     category_id: str | None = None
     spend_type: Literal["regular", "exceptional"] = "regular"
     event: str | None = Field(default=None, max_length=120)
@@ -191,7 +194,7 @@ class TransactionIn(BaseModel):
 class TransactionPatch(BaseModel):
     category_id: str | None = None
     spend_type: Literal["regular", "exceptional"] | None = None
-    kind: Literal["expense", "refund", "income", "transfer"] | None = None
+    kind: Literal["expense", "refund", "income", "transfer", "interest"] | None = None
     event: str | None = Field(default=None, max_length=120)
 
 
@@ -200,6 +203,7 @@ class RuleIn(BaseModel):
     pattern: str = Field(min_length=1, max_length=512)
     category_id: str | None = None
     spend_type: Literal["regular", "exceptional"] = "regular"
+    kind: Literal["expense", "refund", "income", "transfer", "interest"] | None = None
     priority: int = 100
 
     @field_validator("pattern")
@@ -207,6 +211,43 @@ class RuleIn(BaseModel):
     def safe_pattern(cls, value: str) -> str:
         if len(value) > 512:
             raise ValueError("Regex too long")
+        try:
+            re2.compile(value)
+        except Exception as exc:
+            raise ValueError("Unsupported or invalid RE2 expression") from exc
+        return value
+
+
+class RulePatch(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    pattern: str | None = Field(default=None, min_length=1, max_length=512)
+    category_id: str | None = None
+    spend_type: Literal["regular", "exceptional"] | None = None
+    kind: Literal["expense", "refund", "income", "transfer", "interest"] | None = None
+    priority: int | None = Field(default=None, ge=0, le=10000)
+    enabled: bool | None = None
+
+    @field_validator("pattern")
+    @classmethod
+    def safe_pattern(cls, value: str | None) -> str | None:
+        if value is not None:
+            try:
+                re2.compile(value)
+            except Exception as exc:
+                raise ValueError("Unsupported or invalid RE2 expression") from exc
+        return value
+
+
+class RuleFromTransactionIn(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    pattern: str = Field(min_length=1, max_length=512)
+    category_id: str | None = None
+    spend_type: Literal["regular", "exceptional"] | None = None
+    kind: Literal["expense", "refund", "income", "transfer", "interest"] | None = None
+
+    @field_validator("pattern")
+    @classmethod
+    def safe_pattern(cls, value: str) -> str:
         try:
             re2.compile(value)
         except Exception as exc:
@@ -304,7 +345,7 @@ def tx_dict(tx: Transaction, db: Session) -> dict[str, Any]:
         "id": tx.id, "account_id": tx.account_id, "account_name": account.name if account else "Unknown",
         "amount_minor": tx.amount_minor, "currency": "USD", "purchase_date": tx.purchase_date.isoformat(),
         "posted_date": tx.posted_date.isoformat() if tx.posted_date else None,
-        "date_provenance": ("posted_income" if tx.kind == "income" and tx.posted_date else
+        "date_provenance": ("posted_income" if tx.kind in {"income", "interest"} and tx.posted_date else
                             "posted_fallback" if tx.posted_date and tx.purchase_date == tx.posted_date else "purchase_date"),
         "description": tx.description, "merchant": tx.merchant, "kind": tx.kind,
         "category_id": tx.category_id, "category": category.name if category else "Uncategorized",
@@ -319,15 +360,23 @@ def apply_rules(tx: Transaction, db: Session) -> None:
     if tx.rule_locked:
         return
     rules = db.scalars(select(Rule).where(Rule.enabled.is_(True)).order_by(Rule.priority, Rule.id)).all()
-    text = (tx.merchant or tx.description).casefold()[:4096]
+    text = tx.description.casefold()[:4096]
+    texts = [text]
+    if tx.merchant and tx.merchant.casefold() != text:
+        texts.append(tx.merchant.casefold()[:4096])
+    options = re2.Options()
+    options.case_sensitive = False
     for rule in rules:
         try:
-            match = re2.search(rule.pattern, text)
+            compiled = re2.compile(rule.pattern, options=options)
+            match = any(compiled.search(value) for value in texts)
         except Exception:
-            match = None
+            match = False
         if match:
             tx.category_id = rule.category_id
             tx.spend_type = rule.spend_type
+            if rule.kind:
+                tx.kind = rule.kind
             return
 
 
@@ -360,6 +409,13 @@ async def lifespan(_: FastAPI):
         conn.exec_driver_sql("PRAGMA foreign_keys=ON")
         conn.exec_driver_sql("PRAGMA busy_timeout=20000")
     Base.metadata.create_all(engine)
+    with engine.begin() as conn:
+        transaction_columns = {row[1] for row in conn.exec_driver_sql("PRAGMA table_info(transactions)")}
+        if "rule_reviewed" not in transaction_columns:
+            conn.exec_driver_sql("ALTER TABLE transactions ADD COLUMN rule_reviewed BOOLEAN NOT NULL DEFAULT 0")
+        rule_columns = {row[1] for row in conn.exec_driver_sql("PRAGMA table_info(rules)")}
+        if "kind" not in rule_columns:
+            conn.exec_driver_sql("ALTER TABLE rules ADD COLUMN kind VARCHAR(20)")
     with SessionLocal() as db:
         seed(db)
     yield
@@ -490,25 +546,37 @@ def sync_plaid_connection(connection: PlaidConnection, db: Session) -> dict[str,
     except (InvalidToken, ValueError):
         raise HTTPException(500, "Could not decrypt Plaid connection token; check the local key file") from None
     starting_cursor = connection.cursor
-    cursor = starting_cursor
-    added: list[dict[str, Any]] = []
-    modified: list[dict[str, Any]] = []
-    removed: list[dict[str, Any]] = []
-    update_status = None
-    for _ in range(1000):
-        body: dict[str, Any] = {"access_token": access_token, "count": 500}
-        if cursor:
-            body["cursor"] = cursor
-        page = plaid_api("transactions/sync", body)
-        added.extend(page.get("added", []))
-        modified.extend(page.get("modified", []))
-        removed.extend(page.get("removed", []))
-        cursor = page.get("next_cursor", cursor)
-        update_status = page.get("transactions_update_status", update_status)
-        if not page.get("has_more"):
+    # Plaid can mutate a transaction set while a multi-page sync is in progress.
+    # In that case it rejects subsequent pages; discard the staged pages and replay
+    # the complete update from its original cursor, as required by the Sync contract.
+    for restart in range(3):
+        cursor = starting_cursor
+        added: list[dict[str, Any]] = []
+        modified: list[dict[str, Any]] = []
+        removed: list[dict[str, Any]] = []
+        update_status = None
+        try:
+            for _ in range(1000):
+                body: dict[str, Any] = {"access_token": access_token, "count": 500}
+                if cursor:
+                    body["cursor"] = cursor
+                page = plaid_api("transactions/sync", body)
+                added.extend(page.get("added", []))
+                modified.extend(page.get("modified", []))
+                removed.extend(page.get("removed", []))
+                cursor = page.get("next_cursor", cursor)
+                update_status = page.get("transactions_update_status", update_status)
+                if not page.get("has_more"):
+                    break
+            else:
+                raise HTTPException(502, "Plaid history exceeded the safe pagination limit; no updates were applied")
             break
-    else:
-        raise HTTPException(502, "Plaid history exceeded the safe pagination limit; no updates were applied")
+        except HTTPException as exc:
+            mutation_error = "TRANSACTIONS_SYNC_MUTATION_DURING_PAGINATION" in str(exc.detail)
+            if not mutation_error or restart == 2:
+                raise
+            time.sleep(0.25)
+
 
     links = {link.external_account_id: link for link in db.scalars(
         select(PlaidAccountLink).where(PlaidAccountLink.connection_id == connection.id)).all()}
@@ -552,7 +620,10 @@ def sync_plaid_connection(connection: PlaidConnection, db: Session) -> dict[str,
         classification_text = f"{description} {merchant or ''}".casefold()
         payment_hint = bool(re.search(r"\b(payment|autopay|payment thank you|credit card|cardmember|online payment|transfer)\b", classification_text))
         payroll_hint = bool(re.search(r"\b(payroll|paycheck|salary|direct deposit|employer)\b", classification_text))
-        if payment_hint:
+        interest_hint = bool(re.search(r"\b(interest|interest earned|interest paid|interest credit|apy)\b", classification_text))
+        if not is_card and amount_minor > 0 and interest_hint:
+            kind = "interest"
+        elif payment_hint:
             kind = "transfer"
         elif is_card:
             kind = "expense" if amount_minor < 0 else "refund"
@@ -702,6 +773,8 @@ def update_transaction(tx_id: str, payload: TransactionPatch, request: Request, 
         raise HTTPException(422, "Events are only valid for exceptional spending")
     for key, value in changes.items():
         setattr(tx, key, value)
+    if any(key in changes for key in ("category_id", "spend_type", "kind")):
+        tx.rule_reviewed = False
     tx.rule_locked = True
     db.commit()
     return envelope(tx_dict(tx, db), request)
@@ -714,7 +787,7 @@ def monthly_report(request: Request, month: str, basis: Literal["actual", "norma
     rows = db.scalars(select(Transaction).where(Transaction.status == "posted")).all()
     idx = month_index(month)
     def report_month(tx: Transaction) -> str:
-        basis_date = (tx.posted_date or tx.purchase_date) if tx.kind == "income" else tx.purchase_date
+        basis_date = (tx.posted_date or tx.purchase_date) if tx.kind in {"income", "interest"} else tx.purchase_date
         return basis_date.strftime("%Y-%m")
     category_totals: dict[str, dict[str, int]] = {}
     totals = {"regular": 0, "exceptional": 0, "income": 0}
@@ -773,11 +846,86 @@ def monthly_report(request: Request, month: str, basis: Literal["actual", "norma
     return envelope(report, request)
 
 
+def suggested_rule_pattern(text: str) -> str:
+    normalized = " ".join(text.casefold().split())[:500]
+    parts = []
+    for part in re.split(r"(\d+)", normalized):
+        if not part:
+            continue
+        if part.isdigit():
+            parts.append(r"\d+")
+        else:
+            parts.append(re.escape(part).replace(r"\ ", r"\s+"))
+    return "^" + "".join(parts) + "$"
+
+
+@app.get("/api/v1/rules/suggestions")
+def get_rule_suggestions(request: Request, db: Session = Depends(db_session)):
+    rows = db.scalars(select(Transaction).where(
+        Transaction.status == "posted", Transaction.rule_locked.is_(True),
+        Transaction.rule_reviewed.is_(False)
+    ).order_by(Transaction.created_at.desc()).limit(100)).all()
+    suggestions = []
+    for tx in rows:
+        category = db.get(Category, tx.category_id) if tx.category_id else None
+        suggestions.append({
+            "transaction_id": tx.id, "description": tx.description, "merchant": tx.merchant,
+            "kind": tx.kind, "category_id": tx.category_id,
+            "category": category.name if category else "Uncategorized", "spend_type": tx.spend_type,
+            "suggested_pattern": suggested_rule_pattern(tx.description),
+        })
+    return envelope(suggestions, request)
+
+
+@app.post("/api/v1/rules/suggestions/{tx_id}/create", status_code=201)
+def create_rule_from_suggestion(tx_id: str, payload: RuleFromTransactionIn, request: Request,
+                                db: Session = Depends(db_session)):
+    tx = db.get(Transaction, tx_id)
+    if not tx or tx.status != "posted":
+        raise HTTPException(404, "Transaction not found")
+    if not tx.rule_locked or tx.rule_reviewed:
+        raise HTTPException(409, "This transaction has no pending rule suggestion")
+    changes = payload.model_dump(exclude_unset=True)
+    category_id = changes.get("category_id", tx.category_id)
+    spend_type = changes.get("spend_type") or tx.spend_type
+    rule_kind = changes.get("kind")
+    next_kind = rule_kind or tx.kind
+    if category_id and not db.get(Category, category_id):
+        raise HTTPException(422, "Unknown category")
+    if next_kind == "expense" and tx.amount_minor > 0:
+        raise HTTPException(422, "Expense rules require negative outflows")
+    if next_kind in {"income", "refund"} and tx.amount_minor < 0:
+        raise HTTPException(422, "Income and refund rules require positive inflows")
+    rule = Rule(name=payload.name, pattern=payload.pattern, category_id=category_id,
+                spend_type=spend_type, kind=rule_kind, priority=100)
+    tx.category_id = category_id
+    tx.spend_type = spend_type
+    tx.kind = next_kind
+    if spend_type == "regular":
+        tx.event = None
+    tx.rule_locked = False
+    tx.rule_reviewed = True
+    db.add(rule)
+    db.commit()
+    return envelope({"id": rule.id, "name": rule.name, "pattern": rule.pattern,
+                     "category_id": rule.category_id, "spend_type": rule.spend_type, "kind": rule.kind}, request)
+
+
+@app.post("/api/v1/rules/suggestions/{tx_id}/dismiss")
+def dismiss_rule_suggestion(tx_id: str, request: Request, db: Session = Depends(db_session)):
+    tx = db.get(Transaction, tx_id)
+    if not tx or tx.status != "posted":
+        raise HTTPException(404, "Transaction not found")
+    tx.rule_reviewed = True
+    db.commit()
+    return envelope({"dismissed": True}, request)
+
+
 @app.get("/api/v1/rules")
 def get_rules(request: Request, db: Session = Depends(db_session)):
     rows = db.scalars(select(Rule).order_by(Rule.priority, Rule.id)).all()
     return envelope([{"id": r.id, "name": r.name, "pattern": r.pattern, "category_id": r.category_id,
-                      "spend_type": r.spend_type, "priority": r.priority, "enabled": r.enabled} for r in rows], request)
+                      "spend_type": r.spend_type, "kind": r.kind, "priority": r.priority, "enabled": r.enabled} for r in rows], request)
 
 
 @app.post("/api/v1/rules", status_code=201)
@@ -790,15 +938,48 @@ def create_rule(payload: RuleIn, request: Request, db: Session = Depends(db_sess
     return envelope({"id": rule.id, **payload.model_dump()}, request)
 
 
+@app.patch("/api/v1/rules/{rule_id}")
+def update_rule(rule_id: str, payload: RulePatch, request: Request, db: Session = Depends(db_session)):
+    rule = db.get(Rule, rule_id)
+    if not rule:
+        raise HTTPException(404, "Rule not found")
+    changes = payload.model_dump(exclude_unset=True)
+    for field in ("name", "pattern", "spend_type", "priority", "enabled"):
+        if field in changes and changes[field] is None:
+            raise HTTPException(422, f"{field} cannot be null")
+    if "category_id" in changes and changes["category_id"] and not db.get(Category, changes["category_id"]):
+        raise HTTPException(422, "Unknown category")
+    if "name" in changes:
+        changes["name"] = changes["name"].strip()
+        if not changes["name"]:
+            raise HTTPException(422, "Rule name cannot be blank")
+    for key, value in changes.items():
+        setattr(rule, key, value)
+    db.commit()
+    return envelope({"id": rule.id, "name": rule.name, "pattern": rule.pattern,
+                     "category_id": rule.category_id, "spend_type": rule.spend_type,
+                     "kind": rule.kind, "priority": rule.priority, "enabled": rule.enabled}, request)
+
+
+@app.delete("/api/v1/rules/{rule_id}")
+def delete_rule(rule_id: str, request: Request, db: Session = Depends(db_session)):
+    rule = db.get(Rule, rule_id)
+    if not rule:
+        raise HTTPException(404, "Rule not found")
+    db.delete(rule)
+    db.commit()
+    return envelope({"deleted": True}, request)
+
+
 @app.post("/api/v1/rules/apply")
 def run_rules(request: Request, db: Session = Depends(db_session)):
     changed = 0
     rows = db.scalars(select(Transaction).where(Transaction.status == "posted")).all()
     for tx in rows:
-        before = (tx.category_id, tx.spend_type)
+        before = (tx.category_id, tx.spend_type, tx.kind)
         tx.rule_locked = False
         apply_rules(tx, db)
-        changed += before != (tx.category_id, tx.spend_type)
+        changed += before != (tx.category_id, tx.spend_type, tx.kind)
     db.commit()
     return envelope({"changed": changed}, request)
 
@@ -876,13 +1057,15 @@ async def import_csv(request: Request, file: UploadFile = File(...), account_id:
             description_key = description.casefold()
             card_payment = bool(re.search(r"\b(credit card payment|card payment|payment thank you|autopay|payment to (chase|amex))\b", description_key))
             payroll = bool(re.search(r"\b(payroll|paycheck|salary|direct deposit|employer)\b", description_key))
+            interest = bool(re.search(r"\b(interest|apy)\b", description_key))
             if account.kind == "credit_card":
                 kind = "transfer" if amount_minor > 0 and card_payment else ("expense" if amount_minor < 0 else "refund")
                 posted_date = None
             else:
-                kind = "transfer" if card_payment else ("income" if amount_minor > 0 and payroll else
+                kind = "transfer" if card_payment else ("interest" if amount_minor > 0 and interest else
+                                                          "income" if amount_minor > 0 and payroll else
                                                           "expense" if amount_minor < 0 else "transfer")
-                posted_date = txdate if kind == "income" else None
+                posted_date = txdate if kind in {"income", "interest"} else None
             candidates.append({"row": line, "purchase_date": txdate.isoformat(), "amount_minor": amount_minor,
                                "description": description, "kind": kind})
         except (ValueError, InvalidOperation, TypeError) as exc:
@@ -894,7 +1077,7 @@ async def import_csv(request: Request, file: UploadFile = File(...), account_id:
     return envelope({"import_id": batch.id, "state": batch.state, "account_name": account.name,
                      "candidate_count": len(candidates), "error_count": len(errors),
                      "errors": errors[:100], "sample": candidates[:25],
-                     "sign_convention": "negative=outflow; positive=card refund or checking income",
+                     "sign_convention": "negative=outflow; positive=card refund or checking income/interest",
                      "warning": "Review the preview. Overlapping statement files may duplicate transactions."}, request)
 
 
@@ -910,7 +1093,7 @@ def commit_import(batch_id: str, request: Request, db: Session = Depends(db_sess
     for item in candidates:
         txdate = date.fromisoformat(item["purchase_date"])
         tx = Transaction(account_id=batch.account_id, amount_minor=item["amount_minor"], purchase_date=txdate,
-                         posted_date=txdate if item["kind"] == "income" else None,
+                         posted_date=txdate if item["kind"] in {"income", "interest"} else None,
                          description=item["description"], merchant=item["description"], kind=item["kind"],
                          spend_type="regular", source="csv", status="posted")
         apply_rules(tx, db)
