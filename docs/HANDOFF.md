@@ -1,5 +1,19 @@
 # Handoff — updated 2026-10-27
 
+## Dark mode session — 2026-10-27
+
+- Added header **Theme** selector (System/Light/Dark), defaulting to device appearance and persisting explicit selection in browser localStorage. System tracks device changes; blocked storage is tolerated for the current page.
+- Changed `frontend/src/main.tsx`, `frontend/index.html`; added `frontend/src/theme.ts`, `frontend/src/theme.css`, `frontend/src/theme.test.ts`, and `frontend/public/theme-init.js`. Updated `docs/IMPLEMENTATION_STATUS.md` and this handoff. External blocking initialization script resolves appearance before paint and respects existing `script-src 'self'` CSP.
+- Verified: `npm test --prefix frontend` **10 tests pass** (preference storage, system/explicit resolution, blocked storage, theme metadata). `npm run build --prefix frontend` passes. Live GET `/` and `/theme-init.js` succeed, and GET headers retain existing CSP. HEAD `/` returns 405 (existing GET-only SPA route); use GET for smoke checks.
+- Rebuilt production assets served by the existing process; no restart, dependency installation, backend/data/API changes, or listener/configuration changes. User authorized dark-mode implementation only.
+- Not verified: actual browser/iPad visual appearance, native control rendering, or end-to-end theme selector interaction. Next: refresh on iPad and check all three themes, forms and the spread-bill dialog. Earlier integration next steps remain unchanged.
+
+## Dark palette follow-up — 2026-10-27
+
+- Owner requested grey rather than green dark mode. Reworked `frontend/src/theme.css` to neutral charcoal backgrounds, grey borders/text and neutral active controls/buttons. Amber warnings and red errors remain distinct; positive transaction amounts retain a muted green hint. Light mode is unchanged.
+- Updated dark browser theme color to `#18181b` in `frontend/src/theme.ts`, `frontend/public/theme-init.js`, and `frontend/src/theme.test.ts`.
+- Verified: `npm test --prefix frontend` (10 pass) and `npm run build --prefix frontend` pass; production bundle rebuilt. Browser/iPad visual review still pending. No dependencies, backend/data, listener or startup changes. Next: refresh the UI and confirm the neutral palette with the owner.
+
 ## Running application
 
 A first Clonarch 0.1 MVP is implemented and currently running on the confirmed VM at **http://192.168.105.10:8787**. The explicit listener is `192.168.105.10:8787`, not a wildcard. No boot service, firewall/router rule, public ingress, tunnel, DNS, or other VM changes were made. Ordinary background process; VM reboot will stop it. Start/stop scripts are in `scripts/`.

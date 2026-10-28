@@ -5,6 +5,7 @@ Updated 2026-10-27. Running in-process on the current VM at `http://192.168.105.
 ## Usable now
 
 - Responsive React single-page UI with actual/smoothed toggle, month picker and USD totals.
+- Header theme selector: System (default), Light, or Dark. Preference is saved in this browser; System follows device appearance changes. Same-origin pre-paint script avoids a light flash without weakening CSP. Dark styling covers forms, transactions, notices and allocation dialog.
 - FastAPI same-origin JSON endpoints on SQLite; basic CSRF token + exact Origin/Host validation; SQLite data in project-local private `var/` directory.
 - Synthetic account placeholders (four card labels with generic household ownership plus Chase Checking/Owner). They are **not linked bank accounts**; account editor is not implemented.
 - Manual transaction input (expense/income/refund/transfer), user can change categories and regular/exceptional classification in list.

@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
+import './theme.css';
+import { applyTheme, readTheme, saveTheme, type Theme } from './theme';
 
 type Account = {id:string;name:string;owner:string;kind:string};
 type Category = {id:string;name:string};
@@ -17,6 +19,17 @@ async function api(path:string, options:RequestInit={}) {
 }
 const money=(minor:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(minor/100);
 const thisMonth=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`};
+function ThemeControl(){
+ const [theme,setTheme]=useState<Theme>(readTheme);
+ useEffect(()=>{
+  const media=window.matchMedia('(prefers-color-scheme: dark)');
+  const update=()=>applyTheme(theme,media.matches);
+  update();
+  media.addEventListener('change',update);
+  return ()=>media.removeEventListener('change',update);
+ },[theme]);
+ return <label className="theme-control"><span>Theme</span><select aria-label="Color theme" value={theme} onChange={e=>{const next=e.target.value as Theme;saveTheme(next);setTheme(next)}}><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>;
+}
 function App(){
  const [month,setMonth]=useState(thisMonth()),[basis,setBasis]=useState<'actual'|'normalized'>('actual');
  const [accounts,setAccounts]=useState<Account[]>([]),[categories,setCategories]=useState<Category[]>([]),[transactions,setTransactions]=useState<Tx[]>([]),[report,setReport]=useState<any>(null),[notice,setNotice]=useState(''),[loading,setLoading]=useState(true);
@@ -43,7 +56,7 @@ function App(){
  async function commitImport(){if(!importPreview)return;try{const r=await api(`/imports/${importPreview.import_id}/commit`,{method:'POST',body:'{}'});setNotice(`Imported ${r.data.created} transactions`);setImportPreview(null);setUpload(null);await refresh()}catch(err){setNotice((err as Error).message)}}
  const categoriesById=useMemo(()=>new Map(categories.map(c=>[c.id,c.name])),[categories]);
  return <div className="shell">
-  <header className="top"><a className="brand" onClick={()=>setTab('overview')}><span className="brand-icon">C</span><span>clonarch<small>HOUSEHOLD FINANCES</small></span></a><div className="top-right"><span className="connection"><i/> Local data</span><button className="sync" onClick={()=>setNotice('Plaid is not connected yet. Add credentials when ready.')}>Connect accounts</button></div></header>
+  <header className="top"><a className="brand" onClick={()=>setTab('overview')}><span className="brand-icon">C</span><span>clonarch<small>HOUSEHOLD FINANCES</small></span></a><div className="top-right"><ThemeControl/><span className="connection"><i/> Local data</span><button className="sync" onClick={()=>setNotice('Plaid is not connected yet. Add credentials when ready.')}>Connect accounts</button></div></header>
   <main><div className="eyebrow">YOUR HOUSEHOLD · <span>PRIVATE WORKSPACE</span></div><div className="heading-row"><div><h1>Monthly spending</h1><p className="subtitle">Understand what’s normal, and what’s a one-off.</p></div><div className="month-control"><button aria-label="Previous month" onClick={()=>{const [y,m]=month.split('-').map(Number);const d=new Date(y,m-2,1);setMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`)}}>‹</button><input type="month" value={month} onChange={e=>setMonth(e.target.value)}/><button aria-label="Next month" onClick={()=>{const [y,m]=month.split('-').map(Number);const d=new Date(y,m,1);setMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`)}}>›</button></div></div>
   <div className="tabs"><button className={tab==='overview'?'active':''} onClick={()=>setTab('overview')}>Overview</button><button className={tab==='transactions'?'active':''} onClick={()=>setTab('transactions')}>Transactions</button><button className={tab==='rules'?'active':''} onClick={()=>setTab('rules')}>Rules</button></div>
   {notice&&<div className="notice" role="status"><span>{notice}</span><button onClick={()=>setNotice('')}>×</button></div>}
