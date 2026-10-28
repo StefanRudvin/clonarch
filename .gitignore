@@ -1,6 +1,7 @@
 # Local runtime financial data and credentials
 /var/
 /.secrets/
+/.env
 /.cache/
 /.tools/
 /backend/.venv/
