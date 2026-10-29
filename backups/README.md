@@ -2,7 +2,7 @@
 
 `rules.json` contains all rules (including disabled rules) and their referenced category definitions, exported from a consistent read-only database snapshot. It does not include transactions, accounts, or provider credentials. Rule names and patterns may contain merchant/description text; the owner explicitly approved storing these in this private GitHub repository on 2026-10-29.
 
-Snapshot: **253 rules, 25 categories**, exported 2026-10-29. This is a manual point-in-time backup, not continuous protection. Subsequent rule changes are not automatically uploaded.
+Snapshot: **260 rules, 25 categories**, exported 2026-10-29. This is a manual point-in-time backup, not continuous protection. Subsequent rule changes are not automatically uploaded.
 
 ## Refresh
 

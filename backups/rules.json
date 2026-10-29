@@ -1,7 +1,7 @@
 {
   "format": "clonarch-rules",
   "version": 1,
-  "exported_at": "2026-10-29T16:12:35.904558+00:00",
+  "exported_at": "2026-10-29T21:44:17.092677+00:00",
   "rules": [
     {
       "id": "00bc3e05-9f57-4149-ba53-125072b8a426",
@@ -39,6 +39,16 @@
       "pattern": ".*old\\s+navy.*",
       "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
       "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "03a547f0-6751-447d-8b5d-7c3833f861cd",
+      "name": "expense: MICRO CENTER MARIETTA",
+      "pattern": ".*micro\\s+center\\s+marietta.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "exceptional",
       "priority": 100,
       "enabled": 1,
       "kind": null
@@ -344,6 +354,16 @@
       "kind": null
     },
     {
+      "id": "217715d5-bf78-4be1-b475-d2dea32d4fc7",
+      "name": "expense: WELLSTAR MEDICAL GROMARIETTA",
+      "pattern": ".*wellstar.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
       "id": "2290a11c-3b73-4ed2-8317-4760b507908f",
       "name": "expense: Steam Games",
       "pattern": "^steam\\s+games$",
@@ -382,6 +402,16 @@
       "priority": 100,
       "enabled": 1,
       "kind": "expense"
+    },
+    {
+      "id": "28ad6537-a095-42e1-8620-0ad0f737cc8b",
+      "name": "expense: MICRO ELECTRONIC 1275 MARIETTA GA 511832 02/28",
+      "pattern": ".*micro\\s+electronic\\s+\\d+\\s+marietta\\s+ga\\s+\\d+\\s+\\d+/\\d+.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
     },
     {
       "id": "2963bb75-b0ca-49ef-8839-d3804a14ac4e",
@@ -629,6 +659,16 @@
       "pattern": "^ups$",
       "category_id": "ed6072af-da1a-4e81-a5bf-1700cef199e5",
       "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "482f520b-b3c8-485f-9684-e5cef7f613e1",
+      "name": "expense: MOSLEY TAX SERVICE",
+      "pattern": ".*mosley\\s+tax\\s+service.*",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "exceptional",
       "priority": 100,
       "enabled": 1,
       "kind": null
@@ -1169,6 +1209,16 @@
       "pattern": ".*paula's\\s+choics*",
       "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
       "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7d215ee5-cb7d-401b-ba15-fbfdd575dba2",
+      "name": "expense: KENDRICK PLUMBING",
+      "pattern": ".*kendrick\\s+plumbing.*",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "exceptional",
       "priority": 100,
       "enabled": 1,
       "kind": null
@@ -1724,6 +1774,16 @@
       "kind": null
     },
     {
+      "id": "ace5862b-8af7-48a3-989e-a451e65da6c9",
+      "name": "expense: Delta Air Lines",
+      "pattern": ".*delta\\s+air\\s+lines.*",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
       "id": "ae0e2719-6280-4506-bdaa-658a2acf95dd",
       "name": "expense: DICK'S SPORTING GOODCORAOPOLIS",
       "pattern": ".*dick's\\s+sporting\\s+good.*",
@@ -2262,6 +2322,16 @@
       "priority": 100,
       "enabled": 1,
       "kind": "transfer"
+    },
+    {
+      "id": "df96ac88-a474-478c-8a69-52c68c1c889b",
+      "name": "expense: AplPay BOOKING.COM (WILMINGTON, NC DE",
+      "pattern": ".*aplpay\\s+booking\\.com\\s+\\(wilmington,\\s+nc\\s+de.*",
+      "category_id": null,
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
     },
     {
       "id": "dfda6ad3-946a-4650-8c4d-7e5a52ffa907",
