@@ -1,0 +1,2664 @@
+{
+  "format": "clonarch-rules",
+  "version": 1,
+  "exported_at": "2026-10-29T16:00:58.973452+00:00",
+  "rules": [
+    {
+      "id": "00bc3e05-9f57-4149-ba53-125072b8a426",
+      "name": "refund: KNOWN TRAVELER CREDIT",
+      "pattern": "^known\\s+traveler\\s+credit$",
+      "category_id": null,
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "refund"
+    },
+    {
+      "id": "00fdebbf-08d6-4027-92c7-73e1b147525a",
+      "name": "expense: GA STATE PARKS-DNR",
+      "pattern": "^ga\\s+state\\s+parks\\-dnr$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "01982c09-7abe-4d2b-8049-c74eb1298767",
+      "name": "expense: TST* TOPGOLF- ATLANTA",
+      "pattern": "^tst\\*\\s+topgolf\\-\\s+atlanta$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "01c51a49-a122-497a-b7db-ebe8a0aff34d",
+      "name": "expense: Old Navy",
+      "pattern": ".*old\\s+navy.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "03a893bc-3870-4a8b-8bdd-6a66a3643c10",
+      "name": "expense: REV COFFEE ROASTERS",
+      "pattern": "^rev\\s+coffee\\s+roasters$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "056274a1-5e8b-4502-b4e6-1be6d230edd8",
+      "name": "expense: COOL BEANS COFFEE ROA",
+      "pattern": "^cool\\s+beans\\s+coffee\\s+roa$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "067dd354-6f43-40da-94da-fcfff7d62e20",
+      "name": "expense: Venmo",
+      "pattern": "^venmo$",
+      "category_id": "9c53ace9-e114-4215-bc3d-cc320f5ea34b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "06a6a23c-888e-4409-adc9-921e2f699711",
+      "name": "expense: Preply Inc.",
+      "pattern": "^preply\\s+inc\\.$",
+      "category_id": "a7d94f41-e2af-4bf4-81eb-bbcbef669660",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "07960e09-1549-47ad-9a95-4e30c8051368",
+      "name": "expense: AplPay 10120N WELLSTMARIETTA",
+      "pattern": ".*wellstmarietta.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0796bf26-16eb-4555-931b-18cd08f1b991",
+      "name": "expense: Amazon.com*596W797V2",
+      "pattern": "^amazon\\.com\\*\\d+w\\d+v\\d+$",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "0a71bbb9-87cb-47aa-a2af-f84295a8b95e",
+      "name": "expense: Walmart",
+      "pattern": "^walmart$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "0b3e5b93-ae12-4665-92b0-872b9cae9501",
+      "name": "expense: BELK.COM 000000888",
+      "pattern": ".*belk.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0c037cc2-2ac2-4195-a3c2-164f16db865c",
+      "name": "expense: SP FRAGRANCENET.COM",
+      "pattern": ".*fragrancenet*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0c501132-8d4d-47c7-a06e-cae5b0dd4113",
+      "name": "expense: ATM WITHDRAWAL 000973 06/232615 DALL",
+      "pattern": "^atm\\s+withdrawal\\s+\\d+\\s+\\d+/\\d+\\s+dall$",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0c5f63c0-bad0-4cd4-98c1-c086616ff80f",
+      "name": "expense: THESQUARE.ORG",
+      "pattern": "^thesquare\\.org$",
+      "category_id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0d50e880-fce0-4652-8912-1182dd65c572",
+      "name": "expense: Walgreens",
+      "pattern": "^walgreens$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "0f97d6de-48ba-471c-a8c2-3ef01b8cf7b0",
+      "name": "expense: CLR*ClubPilates6782574883",
+      "pattern": "^clr\\*clubpilates\\d+$",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "10ffa807-2aec-4336-b51f-11423dbd0ca5",
+      "name": "expense: FSP*STILLFIRE BREWING SMY",
+      "pattern": "^fsp\\*stillfire\\s+brewing\\s+smy$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "11700261-f646-4f17-8a08-5f1da817a426",
+      "name": "expense: Amazon.com*591MM67V2",
+      "pattern": "^amazon\\.com\\*\\d+mm\\d+v\\d+$",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "11b164d3-ddd6-47c8-919d-3ec06f1f3d54",
+      "name": "expense: AplPay WELLSTAR MYCHMARIETTA",
+      "pattern": ".*wellstar.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "12c250bd-00e9-4f22-bb86-5bc5f3737d86",
+      "name": "expense: DD *DOORDASH OKINAWAHI",
+      "pattern": "^dd\\s+\\*doordash\\s+",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "1362a30a-edd3-4fc7-893c-6a7c25de5ff5",
+      "name": "expense: Spotify",
+      "pattern": "^spotify$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "13638c8f-87ea-47d5-b535-00040f0d102f",
+      "name": "expense: SPICE CORNER",
+      "pattern": "^spice\\s+corner$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "143f9aec-8342-45a2-b4bc-1aee72f2ef97",
+      "name": "expense: HOTEL*Delta",
+      "pattern": "^hotel\\*delta$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "15bc1ea2-bd6b-4b5d-9c48-195e120c20ee",
+      "name": "expense: FOR EYES OPTICAL OF",
+      "pattern": ".*for\\s+eyes\\s+optical.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "1762d9db-bd88-495b-82c6-ade758536aa3",
+      "name": "expense: LACEYS MARIETTA PHARM NIMBLERX.COM CA 10/23",
+      "pattern": "^laceys\\s+marietta\\s+pharm\\s+nimblerx\\.com\\s+ca\\s+\\d+/\\d+$",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "1767373b-3bd5-4ee3-93dc-f2682009396c",
+      "name": "expense: GOOD KITCHEN AND MARKE",
+      "pattern": "^good\\s+kitchen\\s+and\\s+marke$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "17b6bee9-ffb4-4a3e-af64-b06a636f70ac",
+      "name": "expense: SPO*RIOSTEAKHOUSEANDBAKER",
+      "pattern": "^spo\\*riosteakhouseandbaker$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "19275c3c-2389-41f5-b49d-6aaae2e81c7f",
+      "name": "expense: AplPay Wayfair",
+      "pattern": ".*wayfair.*",
+      "category_id": "0042d172-0e33-43e9-9848-a0ded03d2cb9",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "1a03b582-3ccd-4888-b44c-5a4e6eabace0",
+      "name": "expense: MACLAND CAR WASH",
+      "pattern": "^macland\\s+car\\s+wash$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "1a1b95c4-aa0f-4735-bd54-9555b0747d35",
+      "name": "expense: COBB EMC",
+      "pattern": "^cobb\\s+emc$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "1b03f65c-0a0e-40ac-a7ab-ea6835c34280",
+      "name": "expense: LIDL #1430",
+      "pattern": "^lidl\\s+\\#\\d+$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "1f4505e6-cab9-46d2-a7e6-4760d772b682",
+      "name": "expense: PHR*COBBPEDIATRICS",
+      "pattern": ".*cobbpediatrics.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "20d5e60d-0fac-4dc4-87e7-cb65d1dc1dce",
+      "name": "expense: AplPay SYDNEY KEL* (SMYRNA",
+      "pattern": ".*sydney\\s+kel.*",
+      "category_id": "0042d172-0e33-43e9-9848-a0ded03d2cb9",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2290a11c-3b73-4ed2-8317-4760b507908f",
+      "name": "expense: Steam Games",
+      "pattern": "^steam\\s+games$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "2491e00c-e1b0-4727-89a2-9aa4eb6d0f2e",
+      "name": "expense: Fandango",
+      "pattern": "^fandango$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "272e6bbc-246f-4d20-8944-de9e704b115e",
+      "name": "expense: AplPay LIDL #1430 FREDERICKSBUR",
+      "pattern": "lidl",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "27ca673e-7ea9-44fe-8b1a-50675564f712",
+      "name": "expense: UWM ACH PPD ID: 2782750395",
+      "pattern": "^uwm\\s+ach\\s+ppd\\s+id:\\s+\\d+$",
+      "category_id": "34fe2021-1658-4da4-8a08-69649b1ff3cc",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "2963bb75-b0ca-49ef-8839-d3804a14ac4e",
+      "name": "expense: MPIX",
+      "pattern": ".*mpix.*",
+      "category_id": "0042d172-0e33-43e9-9848-a0ded03d2cb9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2997f08b-c37c-47dc-8e8f-6bf9427ef500",
+      "name": "expense: GSCCCA",
+      "pattern": "^gsccca$",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2a3282b4-9658-4133-8e0c-9cb29009b73b",
+      "name": "expense: MICRO CENTER MARIETTA",
+      "pattern": "^micro\\s+center\\s+marietta$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2a7c7992-1a6a-4eaa-b3ac-862d623771ee",
+      "name": "expense: AplPay GIVEAHAND.COMDOVER DE",
+      "pattern": ".*giveahand.*",
+      "category_id": "8c3003be-28cb-4a47-8721-205f8b7bb744",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2aad65b0-4f04-4320-bc5f-e64165a0048a",
+      "name": "expense: THE SQUARE CHURCH",
+      "pattern": "^the\\s+square\\s+church$",
+      "category_id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2b9adf1b-9c26-4560-bca6-6f39343f3031",
+      "name": "expense: PERC WEBSTO",
+      "pattern": "^perc\\s+websto$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "2ca837ef-eb61-43d6-b4c1-93facb165ebb",
+      "name": "expense: ACADEMY SPORTS #260",
+      "pattern": "^academy\\s+sports\\s+\\#\\d+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2e82eccc-4694-423f-90e6-7281a36b5e2d",
+      "name": "transfer: FID BKG SVC LLC MONEYLINE Z316509921H70Z7 WEB ID: 1035141383",
+      "pattern": "^fid\\s+bkg\\s+svc\\s+llc\\s+moneyline\\s+z\\d+h\\d+z\\d+\\s+web\\s+id:\\s+\\d+$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "transfer"
+    },
+    {
+      "id": "2efd82ff-70ab-4289-a7ec-75e0db8a6136",
+      "name": "expense: TST*MEXICO LINDO - SMYRN",
+      "pattern": "^tst\\*mexico\\s+lindo\\s+\\-\\s+smyrn$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "2ffd8885-fb32-40f2-9474-77bff4135132",
+      "name": "expense: AplPay ULTA #1226 12MARIETTA",
+      "pattern": ".*ulta.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "304774cb-4360-453f-803d-ec3ccc5444c4",
+      "name": "expense: PSPT TYBEE PRK",
+      "pattern": "^pspt\\s+tybee\\s+prk$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "321bfc04-1443-4c02-b169-5b1f0548e9f5",
+      "name": "expense: AMAZON MKTPL*5E3DW8MH2",
+      "pattern": "^amazon\\s+mktpl\\*\\d+e\\d+dw\\d+mh\\d+$",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "3226e082-47f8-4263-a3af-7105f7f27e4f",
+      "name": "expense: CVS",
+      "pattern": "^cvs$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "33124c6c-64b1-4fd7-897c-ab2c6990c50d",
+      "name": "expense: Home Depot",
+      "pattern": "^home\\s+depot$",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "359f9ff3-ee50-4a6c-ad9d-bbcb2ebebc10",
+      "name": "expense: NUEVA SAN SALVADOR BA",
+      "pattern": "^nueva\\s+san\\s+salvador\\s+ba$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "397a7b8e-4ee7-4fd6-bc6d-ede3944a9f8f",
+      "name": "expense: WWP*PEACHTREE PEST CONTRO",
+      "pattern": ".*wwp\\*peachtree\\s+pest\\s+contro.*",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "3997a87f-7db0-491a-9f4a-3b6d76936c18",
+      "name": "expense: FINNAIR 1052495066019",
+      "pattern": "^finnair\\s+\\d+$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "3a2be542-6cbb-4db3-90a4-d4050ae92b38",
+      "name": "expense: THE NORMAL BARBERS - P",
+      "pattern": "^the\\s+normal\\s+barbers\\s+\\-\\s+p$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "3b7c3abc-6566-4ebb-b86c-907472b8bbff",
+      "name": "expense: McDonald's",
+      "pattern": ".*mcdonald's.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "3c256400-bbba-4fec-b63a-e1d0a1a2dcf0",
+      "name": "expense: AplPay BELLWOOD COFFAtlanta",
+      "pattern": ".*bellwood.*",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "3db3f2bf-bb89-46ed-a001-db8ec1160782",
+      "name": "expense: THE PATTY WAGON FOOD",
+      "pattern": "^the\\s+patty\\s+wagon\\s+food$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "4059104f-3396-45f1-a36c-edc5e501edf2",
+      "name": "expense: AplPay SPO*RUBY'SSOUSMYRNA",
+      "pattern": ".*aplpay\\s+spo\\*ruby'ssousmyrna.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4280789f-aeea-417e-84a5-1a6834337ee3",
+      "name": "expense: MICRO ELECTRONIC 1275 MARIETTA GA 511832 02/28",
+      "pattern": "^micro\\s+electronic\\s+\\d+\\s+marietta\\s+ga\\s+\\d+\\s+\\d+/\\d+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "45ea06fd-fd46-487d-885b-bc7c560963cd",
+      "name": "refund: HELLOFRESH",
+      "pattern": "^hellofresh$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "466e3a79-e4e3-451b-b888-80bc49f4721b",
+      "name": "expense: UPS",
+      "pattern": "^ups$",
+      "category_id": "ed6072af-da1a-4e81-a5bf-1700cef199e5",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4b0a5e8e-d900-4b35-a91d-02610137bf2d",
+      "name": "expense: BAWARCHI BIRYANIS KENNES",
+      "pattern": "^bawarchi\\s+biryanis\\s+kennes$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "4bf58df6-5a44-4e35-b5ab-35351ffdee1c",
+      "name": "expense: Atlanta Bread Company",
+      "pattern": ".*atlanta\\s+bread\\s+company.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4c63364f-5291-4e26-a81e-74a4edbafde1",
+      "name": "expense: MODENA RISTORANTE VINOTE",
+      "pattern": "^modena\\s+ristorante\\s+vinote$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4c7faee9-b3e5-4efe-adc7-ea2d5753f821",
+      "name": "expense: AplPay HM.COM",
+      "pattern": ".*aplpay\\s+hm\\.com.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4cb3efee-b1ce-49b8-9ab3-4d7ac94621cd",
+      "name": "expense: KENNESAW MOUNTAIN NATIO",
+      "pattern": "^kennesaw\\s+mountain\\s+natio$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4d2e20aa-c922-4e5c-9fe6-b0e137d1f330",
+      "name": "expense: SPO*VIVAMEXICOMEXICANREST",
+      "pattern": "^spo\\*vivamexicomexicanrest$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "4de521e5-fade-4658-a8a1-16c0eeee8110",
+      "name": "expense: COBB COUNTY UTIL CBBCNTYUTL PPD ID: 0000000160",
+      "pattern": "^cobb\\s+county\\s+util\\s+cbbcntyutl\\s+ppd\\s+id:\\s+\\d+$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "4e338597-8c58-4f33-9c2d-64e963b86dfd",
+      "name": "expense: TST* DOUG S NORTH CAROLIN",
+      "pattern": "^tst\\*\\s+doug\\s+s\\s+north\\s+carolin$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4e4b620d-dc19-4ed5-94f7-8996cb451946",
+      "name": "expense: Kroger",
+      "pattern": "^kroger$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "4e4c8cce-7f4e-4723-91d5-44fcaacbf828",
+      "name": "expense: T.J.Maxx",
+      "pattern": "^t\\.j\\.maxx$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4e688915-a3d9-49d5-9d97-01b05db47272",
+      "name": "expense: ZOLA.COM*REGISTRY",
+      "pattern": ".*zola\\.com\\*registry.*",
+      "category_id": "8c3003be-28cb-4a47-8721-205f8b7bb744",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4e6ecfe2-1ad5-433e-bed5-afd5364359bf",
+      "name": "expense: AplPay TST* GRECIAN",
+      "pattern": ".*tst\\*\\s+grecian.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "4f0599cb-c21c-46f9-9aa3-4dfdcd73b0ec",
+      "name": "expense: Shell",
+      "pattern": "^shell$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "50f7cf46-259c-40f7-a9ed-bc2ed8e7fd5d",
+      "name": "expense: AplPay INSTACART*161SAN FRANCISCO",
+      "pattern": ".*instacart.*",
+      "category_id": "8c3003be-28cb-4a47-8721-205f8b7bb744",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "514e3db1-ea37-4472-a9a4-d6575659495b",
+      "name": "expense: State Farm",
+      "pattern": "^state\\s+farm$",
+      "category_id": "616c1cce-9664-4b18-8536-082ec162f33e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "52197b2d-2019-4eb9-9d9d-a9ee47e5f503",
+      "name": "expense: SANCHEZ PAPA'S & CORN",
+      "pattern": "^sanchez\\s+papa's\\s+\\&\\s+corn$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "5252bd2c-e72d-412a-a7a5-56020ab17725",
+      "name": "expense: GA DRIVER SVCS CSC 056",
+      "pattern": "^ga\\s+driver\\s+svcs\\s+csc\\s+\\d+$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5271e7d6-1adb-4651-809e-0c19d4bdc50f",
+      "name": "expense: GA GOV-DNR GO OUTDOORS",
+      "pattern": ".*ga\\s+gov\\-dnr\\s+go\\s+outdoors.*",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "54c950b5-b0d7-48fd-bde1-e07f7a572733",
+      "name": "expense: AplPay LEVI.COM 803",
+      "pattern": "^\\s+levi\\.com\\s+\\d+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "555e33b4-d704-4c0d-bb23-2a0960a90f2a",
+      "name": "expense: AplPay GAPOUTLET.COM800-427-7895",
+      "pattern": ".*gapoutlet.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "55eb6ccc-537c-4560-8267-51710ba9a6d4",
+      "name": "expense: THE LIVINGSTONE AT AM",
+      "pattern": "^the\\s+livingstone\\s+at\\s+am$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "56c8ea29-e3a7-4d75-9819-274b9d26c2c6",
+      "name": "expense: AplPay THE ORIGINAL",
+      "pattern": ".*the\\s+original.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "582bdefa-835e-4578-b21a-d036153a8f67",
+      "name": "expense: Goodwill",
+      "pattern": "^goodwill$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "5849769a-d7e8-4fe5-9b13-09228bbc579d",
+      "name": "expense: DD/BR #336181 336181WOODSTOCK",
+      "pattern": ".*dd/br\\s+\\#\\d+\\s+\\d+woodstock.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "588340e6-c19e-4fb6-a103-06eb68507c78",
+      "name": "expense: IKEA ATLANTA",
+      "pattern": "^ikea\\s+atlanta$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5a446d29-04be-4523-82de-60d2320dc993",
+      "name": "expense: AplPay NEEDLE MOV* NMABLETON",
+      "pattern": ".*needle\\s+mov.*",
+      "category_id": "8c3003be-28cb-4a47-8721-205f8b7bb744",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5c595ed6-a7ff-4c50-be95-f6ba555b1de5",
+      "name": "expense: COCA COLA NORTH METRO ATL",
+      "pattern": ".*coca\\s+cola.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5dd0b634-2ec2-463f-bf6c-17e8900616ff",
+      "name": "expense: CONTACT LENS KING (800)352-0255",
+      "pattern": "^contact\\s+lens\\s+king\\s+\\(\\d+\\)\\d+\\-\\d+$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5e435036-52d4-4e99-9403-c81d34477d0e",
+      "name": "expense: SP ESPRESSO OUTLET LLC",
+      "pattern": "^sp\\s+espresso\\s+outlet\\s+llc$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "5fc7117c-8013-406d-af4f-f49fc916b89b",
+      "name": "expense: AplPay TST* SESSIONSMARIETTA",
+      "pattern": ".*sessionsmarietta.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5fcf764e-9aa1-49df-a8e3-61560c206021",
+      "name": "expense: eBay O*14-14770-98008",
+      "pattern": "^ebay\\s+o\\*\\d+\\-\\d+\\-\\d+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "5fdc26e3-803d-489a-a205-69920aa9f520",
+      "name": "expense: WOODSTOCKCOFFEECOMPANY",
+      "pattern": "^woodstockcoffeecompany$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "5fefbb98-5cab-442e-8c59-6d1e5685b0fd",
+      "name": "expense: WL *STEAM PURCHASE",
+      "pattern": "^wl\\s+\\*steam\\s+purchase$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "602d82d9-e86c-4a98-b2d3-d6615ec3dfc2",
+      "name": "expense: AplPay USPS PO 12704POWDER SPRING",
+      "pattern": "^aplpay\\s+usps\\s+po\\s+\\d+powder\\s+spring$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "619c0054-87f2-4da0-99a8-e2c3b5490200",
+      "name": "atm",
+      "pattern": ".*atm.*",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "63f8e62d-bcdc-40a3-8cf9-c61cd5b14901",
+      "name": "expense: ABC*20082-CRUNCH EAST COB",
+      "pattern": "^abc\\*\\d+\\-crunch\\s+east\\s+cob$",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "64ddc2fb-bd02-4341-997d-d2454de87657",
+      "name": "expense: AplPay TST* BOLIVAR",
+      "pattern": ".*bolivar.*",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "67f90b5e-16ad-4504-820b-611d0fd24b56",
+      "name": "expense: AplPay NIKE.COM AP ABEAVERTON OR",
+      "pattern": "^aplpay\\s+nike\\.com\\$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "686f7107-e331-43ae-bb8a-47d766bff8bf",
+      "name": "income: KNOWN TRAVELER CREDIT",
+      "pattern": "^known\\s+traveler\\s+credit$",
+      "category_id": null,
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "68eee5e3-8571-4991-8218-3045bc52594a",
+      "name": "expense: PIONEERS USA",
+      "pattern": "^pioneers\\s+usa$",
+      "category_id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "6bcaca05-9c2b-4c2e-98f6-35e3c719c1ee",
+      "name": "expense: REV CAFE WEST COBB",
+      "pattern": "^rev\\s+cafe\\s+west\\s+cobb$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "6cba01b7-eeba-4c87-bf95-106b43c844c4",
+      "name": "expense: AplPay LOWES.COM 1-800-445-6937",
+      "pattern": ".*lowes.*",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "6d94f0b9-826c-4b7e-846c-354e19eced34",
+      "name": "expense: TST* GOOD KITCHEN & MARKE",
+      "pattern": "^tst\\*\\s+good\\s+kitchen\\s+\\&\\s+marke$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "6df0fd3c-3412-4a69-82a7-a402b38ed864",
+      "name": "expense: SANGSTERS CAFE",
+      "pattern": "^sangsters\\s+cafe$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "6f0ca530-5e20-4a0d-871f-4dd003b9496a",
+      "name": "expense: AplPay STEEP & CHEAPCOTTONWOOD HE",
+      "pattern": ".*aplpay\\s+steep\\s+\\&\\s+cheapcottonwood\\s+he.*",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "70503ab7-5412-4433-b5a3-13b3c2e8cd1d",
+      "name": "expense: Chick-fil-A",
+      "pattern": "^chick\\-fil\\-a$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "70b5e33f-9de7-4398-a975-aa828eb4d97f",
+      "name": "expense: AplPay 10145 CAVA KEKENNESAW",
+      "pattern": "cava",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "745a608d-39ce-4a47-9cda-45abed615b2a",
+      "name": "expense: PTL*Suomalainen Kirjakaup",
+      "pattern": "^ptl\\*suomalainen\\s+kirjakaup$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "76688b9f-65fc-4991-9076-ebaaa5e9959e",
+      "name": "expense: Delta Air Lines",
+      "pattern": "^delta\\s+air\\s+lines$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "77bbdcd2-ae9c-4642-bf38-525878a56f35",
+      "name": "expense: ALL 4 KIDS MARIETTA GA 08/13",
+      "pattern": "^all\\s+\\d+\\s+kids\\s+marietta\\s+ga\\s+\\d+/\\d+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7853fdeb-0e7a-4eab-85dd-fb48733d268e",
+      "name": "expense: AplPay TIKTOK SHOCULVER CITY",
+      "pattern": ".*tiktok.*",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "79476f0a-c6b6-4d0e-88d5-54796a79549b",
+      "name": "expense: Lowe's Home Improvement",
+      "pattern": "^lowe's\\s+home\\s+improvement$",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "799f3cd6-156a-4939-8a07-d91d54a50f78",
+      "name": "expense: UNITEDWHOLESALE LOAN PAYMT 0206481723 WEB ID: 9DRAFTING",
+      "pattern": "^unitedwholesale\\s+loan\\s+paymt\\s+\\d+\\s+web\\s+id:\\s+\\d+drafting$",
+      "category_id": "34fe2021-1658-4da4-8a08-69649b1ff3cc",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7b0555ba-6c14-4ad0-84d1-4d188b46559b",
+      "name": "expense: AplPay PAULA'S CHOICSEATTLE",
+      "pattern": ".*paula's\\s+choics*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7d4555f4-9224-4cf7-a480-193e5ed0447c",
+      "name": "expense: AplPay PHAMAN ECOMMEBOULDER CO",
+      "pattern": ".*phaman\\s+ecommeboulder\\s+co.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7d54c831-71f8-4283-8f5b-afaf083ce8b2",
+      "name": "expense: AplPay ZARA.COM LA CORUNA ES",
+      "pattern": ".*zara\\.com.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "7ef50228-f4fa-4b95-a796-6825ec2223fb",
+      "name": "expense: OPENAI",
+      "pattern": "^openai$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "8158da9d-2277-4230-904d-c9d79aee25f2",
+      "name": "expense: AplPay FASHION RETAIALCOBENDAS ES",
+      "pattern": ".*fashion\\s+ret.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8254b8ed-fdb0-44ac-ad6c-605a15061892",
+      "name": "expense: Target",
+      "pattern": "^target$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "82947ff6-1162-48ec-b121-db0582edfc39",
+      "name": "expense: SP METAL MASTERS CO.",
+      "pattern": ".*sp\\s+metal\\s+masters\\s+co\\..*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "837226d9-0012-480c-b0c6-6eb39d98d985",
+      "name": "expense: LACEYS MARIETTA PHARMARIETTA",
+      "pattern": ".*laceys\\s+marietta\\.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "84354774-b4f2-4366-892f-645683e35d72",
+      "name": "expense: ABC*20061-CRUNCH FITNESS",
+      "pattern": "^abc\\*\\d+\\-crunch\\s+fitness$",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "84449c52-31f0-4e06-9bc2-0e8ba84e2787",
+      "name": "amazon",
+      "pattern": "Amazon",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "84ce4647-c727-476d-8a37-7b9ee9a4caac",
+      "name": "expense: ATM WITHDRAWAL 005230 02/213615 SAND",
+      "pattern": "^atm\\s+withdrawal\\s+$",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "85606fb9-e898-4eb9-8524-0f6d32801afc",
+      "name": "expense: AplPay THE NORMAL BANEW",
+      "pattern": ".*the\\s+normal\\s.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "85a71e77-f82b-4a6e-9aee-fde47128e30b",
+      "name": "expense: AplPay USPS PO 12559MARIETTA",
+      "pattern": ".*usps.*",
+      "category_id": "ed6072af-da1a-4e81-a5bf-1700cef199e5",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "85c253e7-eeb9-4106-8378-49c191d72d35",
+      "name": "expense: Peacock 04B46 Premium",
+      "pattern": ".*peacock\\s+\\d+b\\d+\\s+premium.*",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "864d5384-54f9-4275-aa87-9da6031f9a30",
+      "name": "expense: AplPay CHOPT ABERCORSAVANNAH",
+      "pattern": ".*chopt.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8872cd3d-c0a4-4c29-ab03-42c10ec25080",
+      "name": "expense: KENDRICK PLUMBING",
+      "pattern": "^\\s+plumbing\\s+$",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8ae77d58-df22-48b1-a56e-3b189a909b45",
+      "name": "expense: AplPay HEALTHY STEPSMARIETTA",
+      "pattern": ".*healthy\\s+steps.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8b602548-a625-4337-b662-48a5478cbcd8",
+      "name": "expense: TST* PARIS BAGUETTE - BAR",
+      "pattern": "^tst\\*\\s+paris\\s+baguette\\s+\\-\\s+bar$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8b6c30b8-529d-49e2-bea6-484ed8a84583",
+      "name": "expense: BODYBAR WEST COBB",
+      "pattern": ".*bodybar.*",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8bd1cd0a-b705-48cc-a3ac-b252fe67e39b",
+      "name": "expense: LUCKY NAILS MARIETTA GA 08/27",
+      "pattern": "^lucky\\s+nails\\s+marietta\\s+ga\\s+\\d+/\\d+$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "8dabbc7e-fcfe-4eac-9a72-eac3de0d0662",
+      "name": "expense: CIRCLEK #2745065",
+      "pattern": "^circlek\\s+\\#\\d+$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "90550fb0-8269-4fb8-9631-27dbe7f4db45",
+      "name": "expense: TST*DAILY GRIND COFFEE H",
+      "pattern": "^tst\\*daily\\s+grind\\s+coffee\\s+h$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9089d27c-9bbd-4ae7-b6d6-85347f8f90a9",
+      "name": "expense: Taco Bell",
+      "pattern": "^taco\\s+bell$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "90ecf078-1da6-4079-9439-4e27a5caabda",
+      "name": "expense: SP BEIS TRAVEL",
+      "pattern": ".*sp\\s+beis\\s+travel.*",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "923c6824-b70c-4188-8cdc-8bc2484b964e",
+      "name": "expense: SP GORJANA",
+      "pattern": "^sp\\s+gorjana$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "933b393b-df59-4e5f-badc-dca55d14dc41",
+      "name": "expense: GA BREAST",
+      "pattern": ".*ga\\s+breast.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9472d35b-81a7-4658-bf47-af4cdc9ffb5f",
+      "name": "expense: TST*BETOS TACOS - SMYRN",
+      "pattern": "^tst\\*betos\\s+tacos\\s+\\-\\s+smyrn$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "94d613f0-b141-495d-9d42-e2844fae58e9",
+      "name": "expense: TST* THE GREAT GREEK - CO",
+      "pattern": "^tst\\*\\s+the\\s+great\\s+greek\\s+\\-\\s+co$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "956eae9c-ece4-4b2d-8167-17d1050ebf64",
+      "name": "expense: IKEA ATLANTA REST",
+      "pattern": "^ikea\\s+$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "956ef1a2-9aa2-47a1-84d7-f8052f62e218",
+      "name": "expense: ATM WITHDRAWAL 004326 05/025218 JIMM",
+      "pattern": "^atm\\s+withdrawal$",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "96ccf3b4-f0f3-4f71-abbd-cc95dd95fe47",
+      "name": "expense: Starbucks",
+      "pattern": "^starbucks$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "99235282-b176-4911-85de-022b1d4b4515",
+      "name": "expense: QuikTrip",
+      "pattern": "^quiktrip$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "992d9b8e-538c-482c-bef0-2b8d5cac026c",
+      "name": "expense: 10157 CAVA CUMBERLAND",
+      "pattern": "^\\d+\\s+cava\\s+cumberland$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "99a1e59e-c3bb-400b-bf33-75be9d09990d",
+      "name": "expense: AplPay NATURAL BODY",
+      "pattern": ".*natural\\s+body.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "99a985d3-dfc4-4901-8703-6150255adba4",
+      "name": "expense: VITAL RECORDS #1",
+      "pattern": "^vital\\s+records\\s+\\#\\d+$",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9a225bfd-a67d-49f9-9b59-435c43bf183e",
+      "name": "expense: REGAL MALL OF GA 0701",
+      "pattern": "^regal\\s+mall\\s+of\\s+ga\\s+\\d+$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "9a39f5c7-150b-49ef-aa78-d159d06dba3d",
+      "name": "expense: SP PERC WEBSTORE",
+      "pattern": "^sp\\s+perc\\s+webstore$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "9a545829-2a2e-4a36-a913-69ae3cebda38",
+      "name": "expense: RaceTrac",
+      "pattern": "^racetrac$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "9aa05ad9-5d73-4f24-a788-3e7a71a9c969",
+      "name": "expense: GEORGIA WINERY",
+      "pattern": "^georgia\\s+winery$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "9ca9ca8a-4efe-4b54-9370-b8e359523484",
+      "name": "expense: PIONEERS USA",
+      "pattern": "^pioneers\\s+usa$",
+      "category_id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9cb1ab11-ae2c-473b-8112-ecc1cee37447",
+      "name": "expense: QUANTUM RADIOLOGY PCMARIETTA",
+      "pattern": ".*quantum\\s+radiology.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9d4d65c0-f414-4bc4-803b-c528433971f4",
+      "name": "expense: AplPay MARATHON 3350MACON",
+      "pattern": ".*marathon.*",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "9de525ea-2896-4cfc-bdf2-5d13f2eacc13",
+      "name": "expense: TMOBILE*PREPD AUTOPY",
+      "pattern": "^tmobile\\*prepd\\s+autopy$",
+      "category_id": "ed7609b6-cba8-44d5-9478-0e5360a209cd",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "9edb8a86-057e-425f-bd19-b0915505477f",
+      "name": "expense: AplPay DOLLARTREE",
+      "pattern": ".*dollartree.*",
+      "category_id": "0042d172-0e33-43e9-9848-a0ded03d2cb9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a1c11ae4-73e7-44f9-8d7f-2618e0505927",
+      "name": "expense: AplPay TST* PARIS BAKENNESAW",
+      "pattern": ".*tst\\*\\s+paris.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a2eb38a8-c515-44ae-b218-036212747c0d",
+      "name": "expense: SPI*GA NATGAS",
+      "pattern": "^spi\\*ga\\s+natgas$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a2f931c1-f743-490d-a6a9-4bb12e23ae9e",
+      "name": "expense: AplPay TST* DAILY GRMARIETTA",
+      "pattern": "^aplpay\\s+tst\\*\\s+daily\\s+$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a4b7441f-cd2d-4f11-bac5-5c08a1fa365c",
+      "name": "expense: USPS PO 1270400304",
+      "pattern": "^usps\\s+po\\s+\\d+$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a8774120-a946-487c-b99b-3a86ad2648d4",
+      "name": "expense: MOSLEY TAX SERVICE",
+      "pattern": "^mosley\\s+tax\\s+service$",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a920b2dc-5ba0-49e2-bf14-56c00f0934bd",
+      "name": "refund: AplPay LEVI.COM 803",
+      "pattern": ".*levi.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "a93b393b-e943-4813-b82b-009105733c20",
+      "name": "expense: SP WISETEK",
+      "pattern": "^sp\\s+wisetek$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "a952c459-597b-455d-8de7-8a42a2603ec1",
+      "name": "expense: KENNESTONE CAFE",
+      "pattern": "^kennestone\\s+cafe$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "aa7fcf04-9b5a-427a-b0f0-8fe45d9c73b0",
+      "name": "expense: VPN* B8TXEDQJ9J",
+      "pattern": "^vpn",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "ab0ef109-3c76-499d-bb45-df1673bbc67d",
+      "name": "expense: SERENITY COUNSELING",
+      "pattern": "^serenity\\s+counseling$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ab4415d1-9f28-4696-bb01-afd02b09d767",
+      "name": "refund: AplPay OLDNAVY.COM",
+      "pattern": "^aplpay\\s+oldnavy\\.com$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ab8faece-4b8a-45f5-9f45-a85d6d09048c",
+      "name": "expense: TST*SESSIONS STAND",
+      "pattern": "^tst\\*sessions\\s+stand$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ae0e2719-6280-4506-bdaa-658a2acf95dd",
+      "name": "expense: DICK'S SPORTING GOODCORAOPOLIS",
+      "pattern": ".*dick's\\s+sporting\\s+good.*",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "af4cc0f9-27e6-4dd6-9d70-ade0c714f6a6",
+      "name": "expense: AplPay BRICK & IVY HMarietta",
+      "pattern": ".*brick\\s+\\&\\s+ivy.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "afa61152-330a-4db5-b5ce-3dc884bc6f6e",
+      "name": "refund: OLDNAVY.COM",
+      "pattern": "^oldnavy\\.com$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b18f3f6f-ba4b-4e55-98f2-008975094508",
+      "name": "expense: TOKYO SUSHI & HIBACHI",
+      "pattern": "^tokyo\\s+sushi\\s+\\&\\s+hibachi$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b2278ed7-2849-4eb7-9761-eb730e3c8a66",
+      "name": "expense: SKINPATH SOLUTIONS ISMYRNA",
+      "pattern": ".*skinpath.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b2c0c11e-60c2-4605-83dc-3974ab1574e8",
+      "name": "expense: TST* CHICHERIA 00007ATLANTA",
+      "pattern": ".*tst\\*\\s+chicheria\\s+\\d+atlanta.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b326b1af-515f-4e80-b396-452955dc3de7",
+      "name": "expense: APPLE.COM/BILL INTERNET CHARGE",
+      "pattern": "^apple\\.com/bill\\s+internet\\s+charge$",
+      "category_id": "ed7609b6-cba8-44d5-9478-0e5360a209cd",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b3769695-ce94-4d5a-883d-873bc0b3f620",
+      "name": "transfer: AMERICAN EXPRESS ACH PMT M1166 WEB ID: 2005032111",
+      "pattern": "^american\\s+express\\s+ach\\s+pmt\\s+m\\d+\\s+web\\s+id:\\s+\\d+$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "transfer"
+    },
+    {
+      "id": "b399ed0c-f220-4c3e-8d3a-7a04a726fdd5",
+      "name": "expense: CIRCLEK #2745065/CIRMACON",
+      "pattern": ".*circlek.*",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b40acbf8-a6df-46d1-b1b9-27e36767e96a",
+      "name": "expense: Publix",
+      "pattern": "^publix$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "b6a58cb5-f10e-44ea-925e-fe1beeae1b96",
+      "name": "expense: FRONTIER AI ON6YJE",
+      "pattern": "^frontier\\s+ai\\s+on\\d+yje$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b6a90a12-2f56-49f7-8581-5b5c7ddbc0da",
+      "name": "expense: GEORGIA NATURAL GAS BAN",
+      "pattern": "^georgia\\s+natural\\s+gas\\s+ban$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "b7f45bcc-45f2-4e40-9e70-2c25f8e7ab72",
+      "name": "expense: Whole Foods",
+      "pattern": ".*whole\\s+foods.*",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "b95f5483-8c36-4a5a-88e2-cfd601538daf",
+      "name": "expense: CAPITAL WASTE - COLUMBIA",
+      "pattern": "^capital\\s+waste\\s+\\-\\s+columbia$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "b9a34066-4276-4e2f-9ab2-e7b2bffde0f0",
+      "name": "expense: PMT*COBB PROPERTY TAX",
+      "pattern": "^pmt\\*cobb\\s+property\\s+tax$",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "b9c03235-90f0-4d15-9431-55d4a694ef75",
+      "name": "expense: THE LOCAL DOE COFFEE HOUS",
+      "pattern": "^the\\s+local\\s+doe\\s+coffee\\s+hous$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "bbf70381-e23d-46f3-ae86-001afb47fdd9",
+      "name": "expense: INTERNAL MEDICINE OFMARIETTA",
+      "pattern": ".*internal\\s+medicine.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bcffd43f-0761-45b7-b541-2358582c7b0e",
+      "name": "expense: GEORGIA ITS TAX GA TX PYMT 1791248592 CCD ID: 2586002015",
+      "pattern": ".*georgia\\s+its\\s+tax.*",
+      "category_id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bd473315-457a-49c4-b8dd-060d66784f9a",
+      "name": "expense: Subway",
+      "pattern": "^subway$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bee78564-1854-469f-9e9d-5ba193464b76",
+      "name": "expense: 10120NWELLSTARKENNESTO",
+      "pattern": "^\\d+nwellstarkennesto$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bf17bb66-f999-40d2-ba43-538b1e25cb5f",
+      "name": "expense: FSP*STILLFIRE BREWING SMY",
+      "pattern": "^fsp\\*stillfire\\s+brewing\\s+smy$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bf74c077-12d0-485f-861a-7713f0826937",
+      "name": "expense: TARGET PLUS 0",
+      "pattern": ".*target.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "bfa55669-31cd-4c96-a822-fb311f6c6efe",
+      "name": "expense: THESQUARE.ORG",
+      "pattern": "^thesquare\\.org$",
+      "category_id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "c20d4efc-0da9-4fb1-b0bd-d62b9d642ec0",
+      "name": "expense: ANNUAL MEMBERSHIP FEE",
+      "pattern": "^annual\\s+membership\\s+fee$",
+      "category_id": "ed6072af-da1a-4e81-a5bf-1700cef199e5",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "c3a7208c-622f-4764-9025-a514bd97e574",
+      "name": "expense: SP WARMIES USA",
+      "pattern": ".*sp\\s+warmies.*",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "c3bfd4db-bf14-4e90-99cf-0d542905d270",
+      "name": "expense: CARTA PARKMOBILE",
+      "pattern": "^carta\\s+parkmobile$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "c3f1dbe3-c7df-41b1-ad95-47d80f8cf662",
+      "name": "expense: CARTA ON STREET OOBEO",
+      "pattern": "^carta\\s+on\\s+street\\s+oobeo$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "c59d2b6e-7012-4ef8-8b1a-113073cd4074",
+      "name": "expense: ATM WITHDRAWAL 002950 05/151740 POWD",
+      "pattern": "^atm\\s+withdrawal\\s+\\d+\\s+\\d+/\\d+\\s+powd$",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "c766c58d-e9fa-479b-a5ac-cd2913e51bc8",
+      "name": "income: HubSpot-OSV PAYROLL617 PPD ID: 00002238",
+      "pattern": "^hubspot\\-osv\\s+payroll\\d+\\s+ppd\\s+id:\\s+\\d+$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "income"
+    },
+    {
+      "id": "c85de359-712e-4f4c-9409-f1000679f0b7",
+      "name": "expense: 10120NWELLSTARKENNESTO",
+      "pattern": "^\\d+nwellstarkennesto$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "c861a510-841a-443a-82d3-4e4bbc84c9ff",
+      "name": "expense: Costco",
+      "pattern": "^costco$",
+      "category_id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "c8a17c38-f800-4213-b452-aeb670c2ac9d",
+      "name": "expense: Staples",
+      "pattern": "^staples$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "cb696a03-9a82-4499-bc8e-6c6c2b8046fe",
+      "name": "expense: 93582-ATLANTA AIRPORATLANTA",
+      "pattern": "^\\d+\\-atlanta\\s+airporatlanta$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "cb8ccd2d-7180-4d8e-adea-a9e514feb1cf",
+      "name": "expense: WOODSTOCK COFFEE COMP",
+      "pattern": "^woodstock\\s+coffee\\s+comp$",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ccafad70-787f-463e-a8a3-2b296366a936",
+      "name": "expense: AplPay DELTA AIR LINATLANTA",
+      "pattern": "^aplpay\\s+delta\\s+air\\s+linatlanta$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "cd858d9f-18da-4410-a9a3-c7c12ad9c65e",
+      "name": "expense: TST*YEERO VILLAGE 2",
+      "pattern": "^tst\\*yeero\\s+village\\s+\\d+$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "cf4d800f-7c20-4af6-aacb-594b087feb70",
+      "name": "expense: FINNAIR 1052495066018",
+      "pattern": "^finnair\\s+\\d+$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "cf6a8dd9-ed04-4a90-8f93-4f423428225a",
+      "name": "expense: BRUSTERS ICE CREAM",
+      "pattern": "^brusters\\s+ice\\s+cream$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "cf8a2c9e-10b5-4ccc-923b-10b5a129dfcb",
+      "name": "expense: Etsy.com*OpenPageDesig",
+      "pattern": "^etsy\\.com\\*openpagedesig$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d1a311b9-8cd3-405d-bae9-3f9df234db80",
+      "name": "expense: Arby's",
+      "pattern": "^arby's$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d22d37e3-16f1-428f-b232-4b86aaf35942",
+      "name": "expense: Bath & Body Works",
+      "pattern": "^bath\\s+\\&\\s+body\\s+works$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d22fb634-3f4f-4975-8971-86471bceac1c",
+      "name": "expense: CAPITAL WASTE SERVICES",
+      "pattern": ".*capital.*waste.*",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d2f97d35-efcf-42f3-8579-51749fb9e7b8",
+      "name": "expense: COBB COUNTY UTIL CBBCNTYUTL COBBCOUNTYUTIL WEB ID: 0000000160",
+      "pattern": "^cobb\\s+county\\s+util\\s+cbbcntyutl\\s+cobbcountyutil\\s+web\\s+id:\\s+\\d+$",
+      "category_id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d3265aae-1571-45ef-a93d-129cecf9ee26",
+      "name": "expense: Uber",
+      "pattern": ".*uber.*",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d4355582-6244-4cc1-b6b1-5d3a11be0fb8",
+      "name": "expense: ED VOYLES HONDA SERVIC SMYRNA GA 06/05",
+      "pattern": "^ed\\s+voyles\\s+honda\\s+servic\\s+smyrna\\s+ga\\s+\\d+/\\d+$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "d822c00c-cdb6-4a4d-9697-97ecc60fe03d",
+      "name": "interest: INTEREST PAYMENT",
+      "pattern": "^interest\\s+payment$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "interest"
+    },
+    {
+      "id": "da04fdfb-4e0f-4b59-ae7d-2af6a1580733",
+      "name": "expense: DOLLARTREE",
+      "pattern": "^dollartree$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "da79c244-880b-4206-a35a-1a141d11ca3c",
+      "name": "expense: CK TOUCH FOR HEALING MA MARIETTA GA 10/23",
+      "pattern": "^ck\\s+touch\\s+for\\s+healing\\s+ma\\s+marietta\\s+ga\\s+\\d+/\\d+$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "dc550c69-ce62-456e-b23b-a6cc8b97681c",
+      "name": "expense: SLEEPY HOLLOW PUMPKIN",
+      "pattern": "^sleepy\\s+hollow\\s+pumpkin$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "dd5f01c2-0542-42b5-a2d9-63aad3c6af0c",
+      "name": "expense: AplPay MARSHALLS",
+      "pattern": "^\\s+marshalls$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "de3b144b-5084-4279-af68-873d93d3df3d",
+      "name": "expense: TRYVORENA",
+      "pattern": ".*tryvorena.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "de5e2788-78d1-4f09-a7d3-5367cfa4b4d4",
+      "name": "transfer: AMERICAN EXPRESS ACH PMT M2250 WEB ID: 2005032111",
+      "pattern": "^american\\s+express\\s+ach\\s+pmt\\s+m\\d+\\s+web\\s+id:\\s+\\d+$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "transfer"
+    },
+    {
+      "id": "de7b3570-841e-4bcc-a112-eee46fd6815f",
+      "name": "expense: Harbor Freight Tools",
+      "pattern": "^harbor\\s+freight\\s+tools$",
+      "category_id": "86d12db4-58da-4412-a650-808f1171368b",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "df101eab-188d-47ef-9163-9ecb4d34d12d",
+      "name": "transfer: AMERICAN EXPRESS ACH PMT W5292 WEB ID: 2005032111",
+      "pattern": "^american\\s+express\\s+ach\\s+pmt\\s+w\\d+\\s+web\\s+id:\\s+\\d+$",
+      "category_id": null,
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "transfer"
+    },
+    {
+      "id": "dfda6ad3-946a-4650-8c4d-7e5a52ffa907",
+      "name": "expense: Zaxby's",
+      "pattern": ".*zaxby's.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "e168a13f-8d46-4e59-baee-2ce5e0b30968",
+      "name": "expense: Hobby Lobby",
+      "pattern": "^hobby\\s+lobby$",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "e5c29c8a-3151-4a36-8222-5d39afb725c3",
+      "name": "expense: LABCORP8008456167",
+      "pattern": ".*labcorp.*",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "e8d9d01d-fbe4-4b86-bb46-fa6f8379fd9b",
+      "name": "expense: ATM WITHDRAWAL 005160 02/213615 SAND",
+      "pattern": "^atm\\s+$",
+      "category_id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ea4ac1ae-9357-4fbf-986f-5bb5ae84b316",
+      "name": "expense: Color Me Mine",
+      "pattern": ".*color\\s+me\\s+mine.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "eb2fca96-d220-400a-a796-1e57a042a3fc",
+      "name": "expense: AplPay DD *DOORDASAN FRANCISCO",
+      "pattern": ".*doordas.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ec7b8526-e0fb-4ea4-aa13-6c0e9f9e3780",
+      "name": "expense: AMAZON MKTPL*XB9NQ2SI3",
+      "pattern": "^amazon\\s+",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "edda9abf-59fc-408b-8080-a406472cfd0f",
+      "name": "expense: USCUSTOMS TRUSTEDTRAVELER",
+      "pattern": "^uscustoms\\s+trustedtraveler$",
+      "category_id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "ee2ae669-a293-47d2-999b-3a1caee9a9e7",
+      "name": "expense: AplPay MARSHALLS",
+      "pattern": "marshalls",
+      "category_id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f0a265c4-714a-4c06-9271-33da07829ea7",
+      "name": "expense: Barnes & Noble",
+      "pattern": ".*barnes\\s+\\&\\s+noble.*",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f0ee8726-6cfa-4249-b07a-db29a88b9053",
+      "name": "expense: Woolfson",
+      "pattern": "^woolfson$",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f1173d6a-9a11-43f1-b4c5-b8fed400b7cf",
+      "name": "expense: AplPay SPO*SESSIONSSMARIETTA",
+      "pattern": ".*sessionssmarietta.*",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f18acd3f-e6e5-46a4-9559-c3e390b87c6b",
+      "name": "refund: AMAZON MKTPLACE PMTS",
+      "pattern": "^amazon\\s+mktplace\\s+pmts$",
+      "category_id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "refund"
+    },
+    {
+      "id": "f1d1aff9-3a7b-47fd-ab31-385164c19970",
+      "name": "refund: ATLANTA FAMILY DOULAS",
+      "pattern": "^atlanta\\s+family\\s+doulas$",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f292d7db-2723-4422-a518-882589e4a1fe",
+      "name": "expense: BREDA PEST MANAGEMENLOGANVILLE",
+      "pattern": ".*breda\\s+pest.*",
+      "category_id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f2ee8c9b-7769-4184-8328-e0622051a275",
+      "name": "expense: AplPay CK TOUCH FOR",
+      "pattern": ".*ck\\s+touch\\s+for.*",
+      "category_id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f371f5ef-2061-412b-b959-e2bc7fa74258",
+      "name": "expense: AplPay BARNES & NOBLMARIETTA",
+      "pattern": ".*aplpay\\s+barnes\\s+\\&\\s+nobl.*",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f4942d03-0aee-471a-8d1e-f5c6d8e3560f",
+      "name": "expense: AplPay TST* DAILY GRMARIETTA",
+      "pattern": ".*daily\\s+gr.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f522f3f3-7208-4408-a664-2fa1aa7f6a2f",
+      "name": "expense: SPO*CLARY'SCAFE",
+      "pattern": "^spo\\*clary'scafe$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f75a01e7-0a91-4965-a431-78ea34d446a1",
+      "name": "expense: AplPay COOL BEANS COMarietta",
+      "pattern": ".*cool\\s+beans.*",
+      "category_id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "f8918e8e-8233-40eb-8c7f-46e9419cf477",
+      "name": "expense: Peacock 7017A Premium",
+      "pattern": "^peacock\\s+\\d+a\\s+premium$",
+      "category_id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "fa2799dc-9f6a-4f9a-979f-1eeb426ad858",
+      "name": "expense: CLR*ClubPilates6786476 GA 02/07",
+      "pattern": ".*clubpilates.*",
+      "category_id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "fb81f189-35fb-4830-a99d-4de783d9bb33",
+      "name": "expense: TST*TREYLOR PARK PIZZA P",
+      "pattern": "^tst\\*treylor\\s+park\\s+pizza\\s+p$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "fba1b1ac-0081-4d88-b857-bc7a35a7d9c8",
+      "name": "expense: BETTERBEE (ONLINE)",
+      "pattern": "^betterbee\\s+\\(online\\)$",
+      "category_id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "fd771e56-0cf6-42b6-83aa-e9c703a426c5",
+      "name": "expense: TST*STIR - CHATTANOOGA",
+      "pattern": ".*tst\\*stir\\s+\\-\\s+chattanooga.*",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    },
+    {
+      "id": "fe12c38d-7835-4456-983d-982f5f02da3c",
+      "name": "expense: PT *ANKLE FOOT CENTERS",
+      "pattern": "^pt\\s+\\*ankle\\s+foot\\s+centers$",
+      "category_id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "spend_type": "exceptional",
+      "priority": 100,
+      "enabled": 1,
+      "kind": "expense"
+    },
+    {
+      "id": "fe94ba4a-4fe7-4ccd-8cb0-a6cf9a33f750",
+      "name": "expense: LONGHORN STEAK 0125101",
+      "pattern": "^longhorn\\s+steak\\s+\\d+$",
+      "category_id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "spend_type": "regular",
+      "priority": 100,
+      "enabled": 1,
+      "kind": null
+    }
+  ],
+  "categories": [
+    {
+      "id": "0042d172-0e33-43e9-9848-a0ded03d2cb9",
+      "name": "Home",
+      "archived": 0
+    },
+    {
+      "id": "0356acb5-ee97-4702-b7d5-7460a755fb4c",
+      "name": "Travel",
+      "archived": 0
+    },
+    {
+      "id": "0ae8ae2b-cc65-425a-81d2-fc1285dee957",
+      "name": "Shopping",
+      "archived": 0
+    },
+    {
+      "id": "0cf5f883-6aa1-4dca-bbd0-0204f470bb44",
+      "name": "Amazon",
+      "archived": 0
+    },
+    {
+      "id": "34fe2021-1658-4da4-8a08-69649b1ff3cc",
+      "name": "Housing",
+      "archived": 0
+    },
+    {
+      "id": "50ecfc18-9639-4e87-b56a-2cefed54dd02",
+      "name": "ATM",
+      "archived": 0
+    },
+    {
+      "id": "55034681-be8c-4438-96ff-b64fd0a341e4",
+      "name": "Coffee",
+      "archived": 0
+    },
+    {
+      "id": "616c1cce-9664-4b18-8536-082ec162f33e",
+      "name": "Insurance",
+      "archived": 0
+    },
+    {
+      "id": "7b6ef4b5-b70f-4585-92e4-cf7908251fa4",
+      "name": "Gifts",
+      "archived": 0
+    },
+    {
+      "id": "807643bd-4da8-40cc-af8d-431db09340a0",
+      "name": "Tax",
+      "archived": 0
+    },
+    {
+      "id": "86d12db4-58da-4412-a650-808f1171368b",
+      "name": "Transport",
+      "archived": 0
+    },
+    {
+      "id": "8ae3bf2d-931b-4a04-bd78-a7806de38761",
+      "name": "Utilities",
+      "archived": 0
+    },
+    {
+      "id": "8c3003be-28cb-4a47-8721-205f8b7bb744",
+      "name": "Generosity",
+      "archived": 0
+    },
+    {
+      "id": "9c53ace9-e114-4215-bc3d-cc320f5ea34b",
+      "name": "Venmo",
+      "archived": 0
+    },
+    {
+      "id": "9d9f4d61-6ff1-4cd7-9f98-42dec8bfe85e",
+      "name": "Groceries",
+      "archived": 0
+    },
+    {
+      "id": "a4f00167-1096-4f70-8131-6ddfe90e1044",
+      "name": "Tithing",
+      "archived": 0
+    },
+    {
+      "id": "a7d94f41-e2af-4bf4-81eb-bbcbef669660",
+      "name": "Learning",
+      "archived": 0
+    },
+    {
+      "id": "bb1a1279-4b20-4976-8759-18c6f594612f",
+      "name": "Fitness",
+      "archived": 0
+    },
+    {
+      "id": "d5ce4aca-270f-4bc7-9a83-14f14ac56b3a",
+      "name": "Self Care",
+      "archived": 0
+    },
+    {
+      "id": "df348d60-d9ee-42ea-992c-975e1a59c8e9",
+      "name": "Dining",
+      "archived": 0
+    },
+    {
+      "id": "e3995391-de71-4528-8d8c-89c91cefe913",
+      "name": "Entertainment",
+      "archived": 0
+    },
+    {
+      "id": "e92721d1-fc22-42c4-98a2-fd1c47b29768",
+      "name": "Home maintenance",
+      "archived": 0
+    },
+    {
+      "id": "ed6072af-da1a-4e81-a5bf-1700cef199e5",
+      "name": "Other",
+      "archived": 0
+    },
+    {
+      "id": "ed7609b6-cba8-44d5-9478-0e5360a209cd",
+      "name": "Subscriptions",
+      "archived": 0
+    },
+    {
+      "id": "f49fae0c-6316-4580-9ac8-e01edd8fed1f",
+      "name": "Health",
+      "archived": 0
+    }
+  ]
+}
